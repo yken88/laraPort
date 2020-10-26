@@ -15,10 +15,13 @@ class PostController extends Controller
 {
     public function index()
     {
-        //textareaのための$users
+        //selectBoxのための$users
         $users = User::all();
 
+        //selectBoxのための$resident
+
         $residents = Resident::all();
+
         $posts = Post::orderBy('user_id', 'asc')
         ->with(['user', 'resident'])
         ->simplePaginate(5);
