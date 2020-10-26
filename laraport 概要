@@ -1,0 +1,61 @@
+laraport check機能
+    詳細画面の表示
+    ボタンを押すと、確認ボタンが確認ずみに変わる。
+    確認したメンバーの名前を表示する。
+
+
+検索機能
+日付、入居者、ユーザー
+selectbox で絞っていくやり方
+
+
+記録の種類の選択
+
+施設テーブル（nursing＿homes)
+名前
+住所
+電話番号
+
+
+入居者の選択
+residentsテーブル
+名前
+性別
+生年月日
+歳
+ユニットID
+備考
+
+ユニットの選択
+unitsテーブル
+名前
+階
+とか
+
+写真投稿
+イベントとか
+
+カレンダーとかはいるかな、イベントとか、通知とか、あとは物品の注文
+
+
+持参物管理
+    belongingsテーブル
+    id
+    name
+    memo
+    date(いつ持ってくる？)
+
+
+検索機能をつける。
+PostControllerで処理した。name('post.search');
+index.blade.php
+        ユーザ検索の場合
+            formのアクションは{{ route('post.search') }}
+            <select name="user_id" class="form-control">
+            <option>ユーザを選択してください</option>
+            @foreach($users as $user)
+            <option value="{{ $user->id }}">{{ $user->name}}</option>
+            @endforeach
+            </select>
+
+                $usersに格納して、indexに渡す。このときはpostのリレーションではなく、usersテーブルから持ってきた方がいい。
