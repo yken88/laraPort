@@ -14,10 +14,10 @@
        <hr>
       
       <!-- 編集と確認ボタン (ここはajaxでした方がいいかも。-->
-      @if(!$checkedMember)
-      <form action="/post/{{ $post->id }}/check" method="post">
-      {{ csrf_field() }}
-        <button type="sumbit" class="btn btn-primary">確認</button>
+      @if(!$checked)
+      <form action="/post/{{ $post->id }}/check" method="get">
+        @csrf
+       <button type="sumbit" class="btn btn-primary">確認</button>
       </form>
       @else
       <form action="/post/{{ $post->id }}/cancel" method="post">
@@ -25,6 +25,11 @@
         <button type="sumbit" class="btn btn-secondary">確認済</button>
       </form>
       @endif
+
+      <h3>確認済ユーザ</h3>
+        @foreach( $checkedMembers as $member)
+        {{ $member->user->name }}
+        @endforeach
 
       
 @endsection

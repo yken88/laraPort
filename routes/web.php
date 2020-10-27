@@ -40,8 +40,7 @@ Route::prefix('post')->group(function(){
     Route::post('/{id}/edit', 'PostController@update')->name('post.update');
     Route::get('/{id}/delete', 'PostController@delete')->name('post.delete');
 // 確認管理
-    Route::post('/{id}/check', 'CheckController@store')->name('check.store'); 
-    Route::post('/{id}/cancel', 'CheckController@destroy')->name('check.destroy'); 
+    Route::get('/{id}/check', 'PostController@check')->name('post.check');
 
  });
 
