@@ -64,13 +64,19 @@ class PostController extends Controller
 
         $user_id = Auth::id();
 
-        $checkedMember = Check::where('user_id', $user_id)
+        $checkedId = Check::get('post_id');
+        
+        $checkedMembers = Check::orderBy('created_at', 'desc')
                         ->where('post_id', $id)
+                        ->with('user')
                         ->get();
 
-        //dd($checkedMember);
+        $checked = DB::table('checks')
+                    ->where('user_id', $user_id)
+                    ->where('post_id', $id)
+                    ->exists();
 
-        return view('post.show', compact('post', 'checkedMember'));
+        return view('post.show', compact('post', 'checkedMembers', 'checked'));
         
     }
 
@@ -120,5 +126,17 @@ class PostController extends Controller
         $user->delete();
 
         return redirect('/post');
+    }
+
+    public function check($id)
+    {
+        $check = new Check;
+        $user_id = Auth::id();
+
+        $check->user_id = $user_id;
+        $check->post_id = $id;
+        $check->save();
+
+        return redirect()->back();
     }
 }
