@@ -25,7 +25,8 @@
         <button type="sumbit" class="btn btn-secondary">確認済</button>
       </form>
       @endif
-
+      <br>
+      
       <h3>確認済ユーザ</h3>
         @foreach( $checkedMembers as $member)
         {{ $member->user->name }}
