@@ -68,8 +68,6 @@ class PostController extends Controller
         $post = Post::find($id);
 
         $user_id = Auth::id();
-
-        $checkedId = Check::get('post_id');
         
         $checkedMembers = Check::orderBy('created_at', 'desc')
                         ->where('post_id', $id)
@@ -127,12 +125,13 @@ class PostController extends Controller
 
     public function delete($id)
     {
-        $user = Post::find($id);
-        $user->delete();
+        $post = Post::find($id);
+        $post->delete();
 
         return redirect('/post');
     }
 
+    // 確認管理
     public function check($id)
     {
         $check = new Check;
@@ -144,4 +143,5 @@ class PostController extends Controller
 
         return redirect()->back();
     }
+
 }

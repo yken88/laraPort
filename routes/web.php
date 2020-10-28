@@ -41,6 +41,7 @@ Route::prefix('post')->group(function(){
     Route::get('/{id}/delete', 'PostController@delete')->name('post.delete');
 // 確認管理
     Route::get('/{id}/check', 'PostController@check')->name('post.check');
+    Route::post('/{id}/check', 'PostController@uncheck')->name('post.uncheck');
 
  });
 
