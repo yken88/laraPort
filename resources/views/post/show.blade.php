@@ -20,10 +20,7 @@
        <button type="sumbit" class="btn btn-primary">確認</button>
       </form>
       @else
-      <form action="/post/{{ $post->id }}/cancel" method="post">
-      {{ csrf_field() }}
         <button type="sumbit" class="btn btn-secondary">確認済</button>
-      </form>
       @endif
       <br>
       
