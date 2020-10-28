@@ -18,7 +18,7 @@
 
 <main role="main">@include('layouts.main')</main>
 
-<footer>@include('layouts.footer')</footer>
+<footer class="bg-dark">@include('layouts.footer')</footer>
 
 
 <script src="../../assets/js/vendor/holder.min.js"></script>
