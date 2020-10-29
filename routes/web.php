@@ -18,6 +18,25 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+//管理者
+Route::prefix('admin')->namespace('Admin')->as('admin.')->group(function(){
+    Route::middleware('guest:admin')->group(function(){
+        // adminログイン（get post)
+            Route::get('login', 'LoginController@showLoginForm')->name('login');
+            Route::post('login', 'LoginController@login');
+    });
+    
+            //ログアウト(get)
+    Route::middleware('auth:admin')->group(function(){
+            Route::get('logout', 'LoginController@logout')->name('logout');
+            //管理者top(get)
+            Route::get('', 'IndexController@index')->name('top');
+    });
+});
+
+        
+
+
 //ユーザ管理
 Route::prefix('/user')->group(function(){
     Route::get('/', 'UserController@index')->name('user.index');
