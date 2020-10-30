@@ -18,6 +18,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('logout','Auth\LoginController@logout')->name('logout');
 //管理者
 Route::prefix('admin')->namespace('Admin')->as('admin.')->group(function(){
     Route::middleware('guest:admin')->group(function(){

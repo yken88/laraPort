@@ -11,6 +11,8 @@
                 <div class="top-right links">
                     @auth
                         <a href="{{ url('/home') }}" class="text-light py-2 d-none d-md-inline-block">Home</a>
+                        <a href="{{ route('logout') }}" class="text-light py-2 d-none d-md-inline-block">ログアウト</a>
+
                     @else
                         <a href="{{ route('login') }}" class="text-light py-2 d-none d-md-inline-block">ログイン</a>
                         <a href="{{ route('register')}}"  class="text-light py-2 d-none d-md-inline-block">登録</a>
