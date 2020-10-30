@@ -15,9 +15,10 @@ class UserController extends Controller
     //ユーザ一覧
     public function index()
     {
-        $admins = Admin::user();
+        $admin = auth()->user();
+
         $users = User::orderBy('id', 'asc')->simplePaginate(5);
-        return view('user.index', compact('users', 'admins'));
+        return view('user.index', compact('users', 'admin'));
     }
 
     public function create()
