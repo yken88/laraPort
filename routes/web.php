@@ -46,7 +46,11 @@ Route::prefix('admin')->namespace('Admin')->as('admin.')->group(function(){
         //一度確認画面を開いた方がいいかもしれない。とりあえず作ってみるって感じで、少しずつ変えていく。
         Route::get('/{id}/delete', 'UserController@delete')->name('user.delete');
     });
-
+    
+    // 入居者管理
+    // Route::prefix('resident')->group(function(){
+    //     Route:get('/', 'ResidentController@index')->name('resident.controller');
+    // });
 });
 
         
