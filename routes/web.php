@@ -18,35 +18,42 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('logout','Auth\LoginController@logout')->name('logout');
+
 //管理者
 Route::prefix('admin')->namespace('Admin')->as('admin.')->group(function(){
     Route::middleware('guest:admin')->group(function(){
         // adminログイン（get post)
-            Route::get('login', 'LoginController@showLoginForm')->name('login');
-            Route::post('login', 'LoginController@login');
+        Route::get('login', 'LoginController@showLoginForm')->name('login');
+        Route::post('login', 'LoginController@login');
     });
     
-            //ログアウト(get)
+        //ログアウト(get)
     Route::middleware('auth:admin')->group(function(){
-            Route::get('logout', 'LoginController@logout')->name('logout');
-            //管理者top(get)
-            Route::get('', 'IndexController@index')->name('top');
+        Route::get('logout', 'LoginController@logout')->name('logout');
+        //管理者top(get)
+        Route::get('', 'IndexController@index')->name('top');
     });
+
+
+    // ユーザ管理
+    Route::prefix('user')->group(function(){
+        Route::get('/', 'UserController@index')->name('user.index');
+        Route::get('/create', 'UserController@create')->name('user.create');
+        Route::post('/create', 'UserController@store')->name('user.store');
+        Route::get('/{id}/edit', 'UserController@edit')->name('user.edit');
+        Route::post('/{id}/edit', 'UserController@update')->name('user.update');
+        //一度確認画面を開いた方がいいかもしれない。とりあえず作ってみるって感じで、少しずつ変えていく。
+        Route::get('/{id}/delete', 'UserController@delete')->name('user.delete');
+    });
+
 });
 
         
 
 
-//ユーザ管理
-Route::prefix('/user')->group(function(){
-    Route::get('/', 'UserController@index')->name('user.index');
-    Route::get('/create', 'UserController@create')->name('user.create');
-    Route::post('/create', 'UserController@store')->name('user.store');
-    Route::get('/{id}/edit', 'UserController@edit')->name('user.edit');
-    Route::post('/{id}/edit', 'UserController@update')->name('user.update');
-    //一度確認画面を開いた方がいいかもしれない。とりあえず作ってみるって感じで、少しずつ変えていく。
-    Route::get('/{id}/delete', 'UserController@delete')->name('user.delete');
-});
+
+
 
 // 投稿管理
 Route::prefix('post')->group(function(){

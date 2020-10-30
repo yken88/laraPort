@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Admin;
+
 
 class UserController extends Controller
 {
@@ -15,10 +16,8 @@ class UserController extends Controller
     //ユーザ一覧
     public function index()
     {
-        $admin = auth()->user();
-
         $users = User::orderBy('id', 'asc')->simplePaginate(5);
-        return view('user.index', compact('users', 'admin'));
+        return view('user.index', compact('users'));
     }
 
     public function create()
