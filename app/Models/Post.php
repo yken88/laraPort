@@ -26,10 +26,13 @@ class Post extends Model
         return $this->belongsTo(Resident::class);
     }
 
+    // 日付のみの取得
     public function getCreatedAtAttribute($date)
     {
     return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('Y-m-d');
+    }
+    
 }   
 
     
-}
+

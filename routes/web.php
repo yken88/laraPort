@@ -65,5 +65,4 @@ Route::prefix('post')->group(function(){
  });
 
 // 検索
-     //Route::get('/search', 'SearchController@search');
-
+ 
