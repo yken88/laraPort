@@ -1,10 +1,11 @@
 @extends('layouts.master')
 @section('title', '申し送り一覧')
 @section('overview', '申し送り、しっかり確認しましょう。')
-@section('content')
 
+@section('content')
 <div class="text-center col-md-6">
   <div class="container">
+  <br>
     <form action="{{ route('post.search') }}" method="get">
       <div class="form-group">
         <select name="user_id" class="form-control">
