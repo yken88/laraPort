@@ -48,9 +48,9 @@ Route::prefix('admin')->namespace('Admin')->as('admin.')->group(function(){
     });
     
     // 入居者管理
-    // Route::prefix('resident')->group(function(){
-    //     Route:get('/', 'ResidentController@index')->name('resident.controller');
-    // });
+     Route::prefix('residents')->group(function(){
+        Route::get('/', 'ResidentsController@index')->name('residents.index');
+     });
 });
 
         
