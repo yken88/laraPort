@@ -4,5 +4,5 @@
 
 @section('content')
     <a href="{{ route('admin.user.index') }}">ユーザ管理</a>
-    <a href="{{ route('admin.resident.index') }}">入居者管理</a>
+    <a href="{{ route('admin.residents.index') }}">入居者管理</a>
 @endsection
