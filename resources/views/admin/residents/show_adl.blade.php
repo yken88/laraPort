@@ -66,7 +66,7 @@
 <br>
 <div class="container">
     <div class="text-right">
-        <a href="" class="btn btn-outline-primary mr-2">編集</a>
+        <a href="{{ route('admin.residents.edit', ['id' => $item->id ]) }}" class="btn btn-outline-primary mr-2">編集</a>
         <a href="" class="btn btn-outline-danger mr-2">削除</a>
         <a href="/" class="btn btn-outline-secondary">戻る</a>
     </div>
