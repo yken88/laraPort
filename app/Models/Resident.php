@@ -4,11 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Post;
+use App\Models\Adl;
 
 class Resident extends Model
 {
     public function posts()
     {
         return $this->hasMany(Post::class);
+    }
+
+    public function Adl()
+    {
+        return $this->hasOne(Adl::class);
     }
 }
