@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PostsTableSeeder::class);
         $this->call(UnitsTableSeeder::class);
         $this->call(ResidentsTableSeeder::class);
+        $this->call(AdlsTableSeeder::class);
 
         factory(App\Models\Admin::class)->create(
             ['username' => 'kentaro', 'password' => bcrypt('password')]
