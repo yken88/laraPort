@@ -50,9 +50,11 @@ Route::prefix('admin')->namespace('Admin')->as('admin.')->group(function(){
     // 入居者管理
      Route::prefix('residents')->group(function(){
         Route::get('/', 'ResidentsController@index')->name('residents.index');
+        Route::get('/create', 'ResidentsController@create')->name('residents.create');
+        Route::post('/create', 'ResidentsController@store')->name('residents.store');
         Route::get('/{id}/show', 'ResidentsController@show')->name('residents.show');
         Route::get('/{id}/edit', 'ResidentsController@edit')->name('residents.edit');
-        Route::post('/{id}/update', 'ResidentsController@update')->name('residents.update');
+        Route::get('/{id}/update', 'ResidentsController@update')->name('residents.update');
      });
 });
 
