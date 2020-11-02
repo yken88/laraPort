@@ -34,7 +34,6 @@
   <thead>
     <tr>
       <th scope="col">😋</th>
-      <th scope="col">入居者</th>
       <th scope="col">タイトル</th>
       <th scope="col">内容</th>
       <th scope="col">日付</th>
@@ -45,7 +44,6 @@
   <tbody>
     <tr>
       <td>{{ $post->user->name }}</td>
-      <td>{{ $post->resident->resident_name}}様</td>
       <td>{{ $post->title }}</td>
       <td>{{ $post->content }}</td>
       <td>{{ $post->created_at }}</td>
@@ -58,4 +56,6 @@
     </tbody>
     @endforeach
 </table>
+{{ $posts->fragment('posts')->links() }}
+
 @endsection
