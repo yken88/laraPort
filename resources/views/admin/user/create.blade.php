@@ -5,7 +5,7 @@
 <form action="{{ route('user.store') }}" method="post">
 @csrf
 <div class="form-group">
-    <label for="exampleInputEmail1">お名前</label>
+    <label for="name">お名前</label>
     <input type="text" name="name" class="form-control" placeholder="お名前">
 
   </div>
