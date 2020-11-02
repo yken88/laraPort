@@ -9,7 +9,7 @@ use App\Models\User;
 use App\Models\Resident;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-
+use App\Http\Requests\StorePostForm;
 
 class PostController extends Controller
 {
@@ -85,19 +85,22 @@ class PostController extends Controller
 
     public function create()
     {
+        $residents = Resident::all();
+    
         $user = Auth::user();
 
-        return view('post.create', compact('user'));
+        return view('post.create', compact('user', 'residents'));
     }
 
-    public function store(Request $request)
+    public function store(StorePostForm $request)
     {
         $post = new Post;
 
-        $id = Auth::user()->id;
         $post->title = $request->title;
         $post->content = $request->content;
-        $post->user_id = $id;
+        $post->user_id = Auth::id();
+        $post->resident_id = $request->resident_id;
+        $post->unit_id = 1;
         $post->save();
 
         return redirect('/post');
