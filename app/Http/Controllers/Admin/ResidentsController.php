@@ -27,17 +27,16 @@ class ResidentsController extends Controller
 
     public function edit($id)
     {
-        $adl = Adl::where('resident_id', $id)
+        $adls = Adl::where('resident_id', $id)
                 ->with('resident')
                 ->get();
-
-        return view('admin.residents.edit', compact('adl'));
+        return view('admin.residents.edit', compact('adls'));
     }
 
     public function update(Request $request)
     {
         $adl = new Adl;
-        
+
         $adl->移乗 = $request->移乗;
         $adl->トイレ動作 = $request->トイレ動作;
         $adl->平地歩行 = $request->平地歩行;
