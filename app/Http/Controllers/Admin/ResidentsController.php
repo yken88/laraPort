@@ -16,6 +16,26 @@ class ResidentsController extends Controller
         return view('admin.residents.index')->with('residents', $residents);
     }
 
+    public function create()
+    {
+        return view('admin.residents.create');
+    }
+
+    public function store(Request $request)
+    {   
+        $resident = new Resident;
+
+        $resident->resident_name = $request->input('resedent_name');
+        $resident->age = $request->age;
+        $resident->gender = $request->gender;
+        $resident->assistance = $request->assistance;
+        $resident->info = $request->info;
+        $resident->unit_id = $request->unit_id;
+
+        $resident->save();
+
+        return redirect()->back();
+    }
     public function show($id)
     {
         $adl = Adl::where('resident_id', $id)

@@ -15,14 +15,14 @@ class ResidentsTableSeeder extends Seeder
         DB::table('residents')->insert([
             [
                 'resident_name' => '入江 ひろえ',
-                'birthday' => Carbon::today(),
+                'age' => 95,
                 'gender' => 1,
                 'assistance' => '日常生活動作は自立です。',
                 'info' => '転倒の恐れあり。本氏が立ち上がった際は要付き添い。',
                 'unit_id' => 1,
             ],[
                 'resident_name' => '福田 静江',
-                'birthday' => Carbon::today(),
+                'age' => 99,
                 'gender' => 1,
                 'assistance' => '日常生活動作は主に自立。',
                 'info' => '転倒の恐れあり。本氏が立ち上がった際は要付き添い。
@@ -30,7 +30,7 @@ class ResidentsTableSeeder extends Seeder
                 'unit_id' => 2,
             ],[
                 'resident_name' => '矢野 健太郎',
-                'birthday' => Carbon::today(),
+                'age' => 86,
                 'gender' => 2,
                 'assistance' => '日常生活動作は全介助です。',
                 'info' => '車椅子誘導にて移動されます。食事は全介助です。',

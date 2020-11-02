@@ -16,7 +16,7 @@ class CreateResidentsTable extends Migration
         Schema::create('residents', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('resident_name');
-            $table->date('birthday');
+            $table->integer('age');
             $table->boolean('gender');
             $table->integer('unit_id');
             $table->timestamps();
