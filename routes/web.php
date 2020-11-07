@@ -58,12 +58,6 @@ Route::prefix('admin')->namespace('Admin')->as('admin.')->group(function(){
      });
 });
 
-        
-
-
-
-
-
 // 投稿管理
 Route::prefix('post')->group(function(){
     Route::get('/', 'PostController@index')->name('post.index');
@@ -73,7 +67,7 @@ Route::prefix('post')->group(function(){
     Route::post('/create', 'PostController@store')->name('post.store');
     Route::get('/{id}/edit', 'PostController@edit')->name('post.edit');
     Route::post('/{id}/edit', 'PostController@update')->name('post.update');
-    Route::get('/{id}/delete', 'PostController@delete')->name('post.delete');
+    Route::delete('/{id}/delete', 'PostController@delete')->name('post.delete');
 // 確認管理
     Route::get('/{id}/check', 'PostController@check')->name('post.check');
     Route::post('/{id}/check', 'PostController@uncheck')->name('post.uncheck');

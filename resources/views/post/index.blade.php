@@ -33,29 +33,38 @@
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">😋</th>
-      <th scope="col">タイトル</th>
-      <th scope="col">内容</th>
-      <th scope="col">日付</th>
-      <th scope="col">ボタン</th>
+      <th scope="col" style="width:10%;">投稿者</th>
+      <th scope="col" style="width:10%;">入居者</th>
+      <th scope="col" style="width:10%;">タイトル</th>
+      <th scope="col" style="width:40%;">内容</th>
+      <th scope="col" style="width:10%;">日付</th>
+      <th scope="col" style="width:20%;">ボタン</th>
     </tr>
   </thead>
 @foreach($posts as $post)
   <tbody>
     <tr>
       <td>{{ $post->user->name }}</td>
+      <td>{{ $post->resident_name }}</td>
       <td>{{ $post->title }}</td>
       <td>{{ $post->content }}</td>
       <td>{{ $post->created_at }}</td>
      <td>
-      <a href="post/{{ $post->id }}/edit" class="btn btn-primary mb-2">変更</a> 
-      <a href="post/{{ $post->id }}/show" class="btn btn-secondary mb-2">詳細</a>
-      <a href="post/{{ $post->id }}/delete" class="btn btn-danger">削除</a>
+      <a href="{{ route('post.edit', ['id' => $post->id])}}" class="btn btn-primary mb-2">変更</a> 
+      <a href="{{route('post.show', ['id' => $post->id])}}" class="btn btn-secondary mb-2">詳細</a>
+      <form action="{{route('post.delete', ['id' => $post->id])}}" method="post">
+      @csrf
+      {{ method_field('delete') }}
+      <a href="#" data_id="{{ $post->id }}" class="btn btn-danger">削除</a>
+
+      </form>
     </td>
     </tr>
     </tbody>
     @endforeach
+    <div class="text-center">
+    {{ $posts->links()}}
+    </div>
 </table>
-{{ $posts->fragment('posts')->links() }}
 
 @endsection
