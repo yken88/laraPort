@@ -12,9 +12,10 @@
 
 <header>@include('layouts.header')</header>
 
-<main role="main">@include('layouts.main')</main>
+<div class="main bg-dark">@include('layouts.admin_main')</div>
 
 <footer class="bg-dark">@include('layouts.footer')</footer>
 
-  </body>
+
+    </body>
 </html>
