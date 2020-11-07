@@ -13,7 +13,7 @@
         <hr>
         作成日: {{ $post->created_at }}
        <hr>
-       <div class="row">
+       <div class="row">∏
        <div class="container">    
         <a href="edit" class="btn btn-secondary mb-2">編集</a>
         
