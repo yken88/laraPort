@@ -56,6 +56,5 @@
     </tbody>
     @endforeach
 </table>
-{{ $posts->fragment('posts')->links() }}
-
+{{ $posts->appends(request()->input())->links() }}
 @endsection
