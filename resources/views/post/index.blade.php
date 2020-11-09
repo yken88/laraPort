@@ -52,19 +52,19 @@
      <td>
       <a href="{{ route('post.edit', ['id' => $post->id])}}" class="btn btn-primary mb-2">変更</a> 
       <a href="{{route('post.show', ['id' => $post->id])}}" class="btn btn-secondary mb-2">詳細</a>
-      <form action="{{route('post.delete', ['id' => $post->id])}}" method="post">
+    <!-- デリート機能 -->
+      <hr>
+      <form action="{{ url('post/'.$post->id) }}" method="POST">
       @csrf
-      {{ method_field('delete') }}
-      <a href="#" data_id="{{ $post->id }}" class="btn btn-danger">削除</a>
-
+      {{ method_field('DELETE') }}
+      <button type="submit" id="delete-task-{{ $post->id }}" class="btn btn-danger">
+        <i class="fa fa-btn fa-trash"></i> 削除
+      </button>
       </form>
     </td>
     </tr>
     </tbody>
     @endforeach
-    <div class="text-center">
-    {{ $posts->links()}}
-    </div>
 </table>
 {{ $posts->appends(request()->input())->links() }}
 @endsection
