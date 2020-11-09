@@ -24,10 +24,9 @@ class PostController extends Controller
         $users = User::all();
 
         //selectBoxのための$resident
-
         $residents = Resident::all();
 
-        $posts = Post::orderBy('user_id', 'asc')
+        $posts = Post::orderBy('created_at', 'asc')
         ->with(['user', 'resident'])
         ->simplePaginate(5);
         
@@ -133,7 +132,7 @@ class PostController extends Controller
         $post = Post::find($id);
         $post->delete();
 
-        return redirect('/post');
+        return redirect()->back();
     }
 
     // 確認管理
