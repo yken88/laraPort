@@ -44,18 +44,20 @@ class PostController extends Controller
         $residentId = $request->resident_id;
 
         if($userId && !$residentId){
-            $posts = Post::where('user_id', $userId)->get();
+            $posts = Post::where('user_id', $userId)
+                        ->simplePaginate(5);
         }
         
 
         if(!$userId && $residentId){
-            $posts = Post::where('resident_id', $residentId)->get();
+            $posts = Post::where('resident_id', $residentId)
+                        ->simplePaginate(5);
         }
 
         if($userId && $residentId){
             $posts = Post::where('user_id', $userId)
-                    ->where('resident_id', $userId)
-                    ->get();
+                        ->where('resident_id', $userId)
+                        ->simplePaginate(5);
         }
         
 

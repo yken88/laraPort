@@ -66,5 +66,5 @@
     {{ $posts->links()}}
     </div>
 </table>
-
+{{ $posts->appends(request()->input())->links() }}
 @endsection

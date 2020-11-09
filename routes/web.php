@@ -58,6 +58,12 @@ Route::prefix('admin')->namespace('Admin')->as('admin.')->group(function(){
      });
 });
 
+        
+
+
+
+
+
 // 投稿管理
 Route::prefix('post')->group(function(){
     Route::get('/', 'PostController@index')->name('post.index');
