@@ -73,7 +73,7 @@ Route::prefix('post')->group(function(){
     Route::post('/create', 'PostController@store')->name('post.store');
     Route::get('/{id}/edit', 'PostController@edit')->name('post.edit');
     Route::post('/{id}/edit', 'PostController@update')->name('post.update');
-    Route::delete('/{id}/delete', 'PostController@delete')->name('post.delete');
+    Route::get('/{id}/delete', 'PostController@delete')->name('post.delete');
     Route::delete('/{post}', 'PostController@destroy');
 // 確認管理
     Route::get('/{id}/check', 'PostController@check')->name('post.check');
