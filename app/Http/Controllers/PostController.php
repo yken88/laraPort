@@ -124,13 +124,17 @@ class PostController extends Controller
         $post->user_id = $id;
         $post->save();
 
-        return redirect('/post');
+        return redirect()->back();
     }
 
-     public function delete($id)
+     public function delete($id, Request $request, Post $post)
         {
-            return redirect()->back()->with('comfirm', 'この投稿を削除してもよろしいですか？');
-         }
+
+            $delete_post = Post::with('user')->find($id);
+
+            
+            return view('post.delete', compact('delete_post'));
+        }
 
     public function destroy(Request $request, Post $post)
     {
@@ -138,7 +142,7 @@ class PostController extends Controller
 
         $post->delete();
 
-        return redirect()->back();
+        return redirect('/post');
     }
 
     // 確認管理

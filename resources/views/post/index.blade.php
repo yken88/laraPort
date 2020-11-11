@@ -54,13 +54,8 @@
       <a href="{{route('post.show', ['id' => $post->id])}}" class="btn btn-secondary mb-2">詳細</a>
     <!-- デリート機能 -->
       <hr>
-      <form action="{{ url('post/'.$post->id) }}" method="POST">
-      @csrf
-      {{ method_field('DELETE') }}
-      <button type="submit" id="delete-task-{{ $post->id }}" class="btn btn-danger">
-        <i class="fa fa-btn fa-trash"></i> 削除
-      </button>
-      </form>
+      <a href="{{ route('post.delete', ['id' => $post->id]) }}" class="btn btn-danger">
+      <i class="fa fa-btn fa-trash"></i>削除</a>
     </td>
     </tr>
     </tbody>
