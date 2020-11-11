@@ -10,6 +10,8 @@ use App\Models\Resident;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StorePostForm;
+use Illuminate\Support\Facades\Gate;
+
 
 class PostController extends Controller
 {
@@ -22,7 +24,6 @@ class PostController extends Controller
     {
         //selectBoxのための$users
         $users = User::all();
-
         //selectBoxのための$resident
         $residents = Resident::all();
 
@@ -128,13 +129,18 @@ class PostController extends Controller
     }
 
      public function delete($id, Request $request, Post $post)
-        {
+    {   
 
-            $delete_post = Post::with('user')->find($id);
+        $delete_post = Post::with('user')->find($id);
 
+        $this->authorize('destroy', $delete_post);
+
+        return view('post.delete', compact('delete_post'));
+
+        
+        //return redirect()->back()->with('flash_message', '削除できるのは、自分が投稿した申し送りのみ');
             
-            return view('post.delete', compact('delete_post'));
-        }
+    }
 
     public function destroy(Request $request, Post $post)
     {
