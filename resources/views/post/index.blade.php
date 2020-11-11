@@ -28,7 +28,7 @@
 </div>
 <br>
 <div class="text-center">
-  <a href="post/create" class="btn btn-outline-dark mb-2">新規作成</a>
+  <a href="{{ route('post.create') }}" class="btn btn-outline-dark mb-2">新規作成</a>
 </div>
 <table class="table">
   <thead>

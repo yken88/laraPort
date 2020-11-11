@@ -127,13 +127,10 @@ class PostController extends Controller
         return redirect('/post');
     }
 
-    // public function delete($id)
-    // {
-    //     $post = Post::find($id);
-    //     $post->delete();
-
-    //     return redirect()->back();
-    // }
+     public function delete($id)
+        {
+            return redirect()->back()->with('comfirm', 'この投稿を削除してもよろしいですか？');
+         }
 
     public function destroy(Request $request, Post $post)
     {
