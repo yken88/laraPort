@@ -47,7 +47,7 @@
       <td>{{ $post->user->name }}</td>
       <td>{{ $post->resident_name }}</td>
       <td>{{ $post->title }}</td>
-      <td>{{ $post->content }}</td>
+      <td>{{ $content }}</td>
       <td>{{ $post->created_at }}</td>
      <td>
       <a href="{{ route('post.edit', ['id' => $post->id])}}" class="btn btn-primary mb-2">変更</a> 

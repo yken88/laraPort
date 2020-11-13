@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StorePostForm;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -31,8 +32,13 @@ class PostController extends Controller
         ->with(['user', 'resident'])
         ->simplePaginate(5);
         
-        
-        return view('post.index', compact('posts', 'users', 'residents'));
+        foreach($posts as $post)
+        {
+            $contents = $post->content;
+        }
+        $content = Str::limit($contents, 30);
+
+        return view('post.index', compact('posts', 'users', 'residents','content'));
         
     }
 
@@ -60,9 +66,15 @@ class PostController extends Controller
                         ->where('resident_id', $userId)
                         ->simplePaginate(5);
         }
+
+        foreach($posts as $post)
+        {
+            $contents = $post->content;
+        }
+        $content = Str::limit($contents, 30);
         
 
-        return view('post.index', compact('users', 'posts', 'residents'));
+        return view('post.index', compact('users', 'posts', 'residents','content'));
     }
 
     public function show($id)
