@@ -134,12 +134,7 @@ class PostController extends Controller
         $delete_post = Post::with('user')->find($id);
 
         $this->authorize('destroy', $delete_post);
-
-        return view('post.delete', compact('delete_post'));
-
-        
-        //return redirect()->back()->with('flash_message', '削除できるのは、自分が投稿した申し送りのみ');
-            
+        return view('post.delete', compact('delete_post'));     
     }
 
     public function destroy(Request $request, Post $post)
