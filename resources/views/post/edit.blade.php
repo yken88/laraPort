@@ -5,16 +5,31 @@
 <form action="" method="post">
 @csrf
 <div class="form-group">
-    <label for="exampleInputEmail1">タイトル</label>
-    <input type="text" name="title" class="form-control" placeholder="{{ $post->title }}">
-
-  </div>
-  <div class="form-group">
-    <label for="exampleInputEmail1">内容</label>
-    <input  name="content" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="{{ $post->content }}">
-  </div>
+     <label for="resident">入居者 :</label>
+        <select name="resident_id" class="form-control col-md-6">
+            <option value="{{ $post->resident->id }}">{{ $post->resident->resident_name }} 様</option>
+            @foreach($residents as $resident )
+            <option value="{{ $resident->id }}">{{ $resident->resident_name }} 様</option>
+            @endforeach
+        </select>
+      <br> 
+      <label for="unit">ユニット :</label>
+          <select name="unit_id" class="form-control col-md-6">
+                <option value="{{ $post->unit->id }}">{{ $post->unit->unit_name }}</option>
+                @foreach($units as $unit )
+                <option value="{{ $unit->id }}">{{ $unit->unit_name }}</option>
+                @endforeach
+          </select>
+      <br>
+    <label for="title">タイトル :</label>
+        <input type="text" name="title" class="form-control" value="{{ $post->title }}">
+      <br>
+    <label for="content">内容 :</label>
+        <input type="text" name="content" class="form-control" value="{{ $post->content }}">
   <div class="text-right">
-  <button type="submit" class="btn btn-primary">更新する</button>
+  <br>
+  <button type="submit" class="btn btn-outline-primary">更新する</button>
+  </div>
   </div>
 </form>
 @endsection

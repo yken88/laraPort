@@ -35,6 +35,48 @@ class ResidentsTableSeeder extends Seeder
                 'assistance' => '日常生活動作は全介助です。',
                 'info' => '車椅子誘導にて移動されます。食事は全介助です。',
                 'unit_id' => 3,
+            ],[
+                'resident_name' => '宮本 花江',
+                'age' => 86,
+                'gender' => 2,
+                'assistance' => '日常生活動作は全介助です。',
+                'info' => '車椅子誘導にて移動されます。食事は全介助です。',
+                'unit_id' => 4,
+            ],[
+                'resident_name' => '中村 くみ',
+                'age' => 86,
+                'gender' => 2,
+                'assistance' => '日常生活動作は全介助です。',
+                'info' => '車椅子誘導にて移動されます。食事は全介助です。',
+                'unit_id' => 3,
+            ],[
+                'resident_name' => '下津濱 彩子',
+                'age' => 86,
+                'gender' => 2,
+                'assistance' => '日常生活動作は全介助です。',
+                'info' => '車椅子誘導にて移動されます。食事は全介助です。',
+                'unit_id' => 5,
+            ],[
+                'resident_name' => '田口 あや子',
+                'age' => 86,
+                'gender' => 2,
+                'assistance' => '日常生活動作は全介助です。',
+                'info' => '車椅子誘導にて移動されます。食事は全介助です。',
+                'unit_id' => 6,
+            ],[
+                'resident_name' => '橋本 なな',
+                'age' => 86,
+                'gender' => 2,
+                'assistance' => '日常生活動作は全介助です。',
+                'info' => '車椅子誘導にて移動されます。食事は全介助です。',
+                'unit_id' => 7,
+            ],[
+                'resident_name' => '石川 たか子',
+                'age' => 86,
+                'gender' => 2,
+                'assistance' => '日常生活動作は全介助です。',
+                'info' => '車椅子誘導にて移動されます。食事は全介助です。',
+                'unit_id' => 8,
             ],
             
             ]);

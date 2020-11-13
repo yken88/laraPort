@@ -7,11 +7,11 @@ use App\Models\Post;
 use App\Models\Check;
 use App\Models\User;
 use App\Models\Resident;
+use App\Models\Unit;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StorePostForm;
 use Illuminate\Support\Facades\Gate;
-
 
 class PostController extends Controller
 {
@@ -27,7 +27,7 @@ class PostController extends Controller
         //selectBoxのための$resident
         $residents = Resident::all();
 
-        $posts = Post::orderBy('created_at', 'asc')
+        $posts = Post::orderBy('created_at', 'desc')
         ->with(['user', 'resident'])
         ->simplePaginate(5);
         
@@ -110,22 +110,26 @@ class PostController extends Controller
 
     public function edit($id)
     {
-        $post = Post::findOrFail($id);
+        $units = Unit::all();
+        $residents = Resident::all();
 
-        return view('post.edit', compact('post'));
+        $post = Post::with(['resident', 'unit'])->findOrFail($id);
+                
+        return view('post.edit', compact('post', 'residents', 'units'));
     }
 
-    public function update(Request $request)
+    public function update($id, Request $request)
     {
-        $post = new Post;
-        $id = Auth::id();
+        $post = Post::find($id);
 
+        $post->resident_id = $request->resident_id;
+        $post->unit_id = $request->unit_id;
         $post->title = $request->title;
         $post->content = $request->content;
-        $post->user_id = $id;
-        $post->save();
+        $post->user_id = Auth::id();
+        $post->update();
 
-        return redirect()->back();
+        return redirect('/post');
     }
 
      public function delete($id, Request $request, Post $post)
@@ -150,9 +154,8 @@ class PostController extends Controller
     public function check($id)
     {
         $check = new Check;
-        $user_id = Auth::id();
 
-        $check->user_id = $user_id;
+        $check->user_id = Auth::id();
         $check->post_id = $id;
         $check->save();
 
