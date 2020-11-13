@@ -24,7 +24,35 @@ class UnitsTableSeeder extends Seeder
             'unit_name' => 'あじさい',
             'user_id' => 3,
             'floor' => 4,
-        ]
+        ],[
+            'unit_name' => 'たんぽぽ',
+            'user_id' => 4,
+            'floor' => 4,
+        ],[
+            'unit_name' => 'ばら',
+            'user_id' => 5,
+            'floor' => 3,
+        ],[
+            'unit_name' => 'つばき',
+            'user_id' => 6,
+            'floor' => 3,
+        ],[
+            'unit_name' => 'ふじ',
+            'user_id' => 7,
+            'floor' => 2,
+        ],[
+            'unit_name' => 'るり',
+            'user_id' => 8,
+            'floor' => 2,
+        ],[
+            'unit_name' => 'たけ',
+            'user_id' => 9,
+            'floor' => 1,
+        ],[
+            'unit_name' => 'うめ',
+            'user_id' => 10,
+            'floor' => 1,
+            ]
         ]);
     }
 }

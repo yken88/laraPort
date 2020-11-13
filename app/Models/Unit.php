@@ -22,4 +22,5 @@ class Unit extends Model
     {
         return $this->hasMany(Post::class);
     }
+
 }

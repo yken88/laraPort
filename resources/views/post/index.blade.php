@@ -61,10 +61,10 @@
     </tbody>
     @endforeach
 </table>
-        @if (session('flash_message'))
+          @if (session('flash_message'))
             <div class="text-danger">
                 {{ session('flash_message') }}
             </div>
-        @endif
+          @endif
 {{ $posts->appends(request()->input())->links() }}
 @endsection
