@@ -37,8 +37,8 @@
       <th scope="col" style="width:10%;">入居者</th>
       <th scope="col" style="width:10%;">タイトル</th>
       <th scope="col" style="width:40%;">内容</th>
-      <th scope="col" style="width:10%;">日付</th>
-      <th scope="col" style="width:20%;">ボタン</th>
+      <th scope="col" style="width:12%;">日付</th>
+      <th scope="col" style="width:18%;">ボタン</th>
     </tr>
   </thead>
 @foreach($posts as $post)
@@ -47,15 +47,13 @@
       <td>{{ $post->user->name }}</td>
       <td>{{ $post->resident_name }}</td>
       <td>{{ $post->title }}</td>
-      <td>{{ $post->content }}</td>
+      <td>{{ \Illuminate\Support\Str::limit($post->content, 70, $end='...') }}</td>
       <td>{{ $post->created_at }}</td>
      <td>
-      <a href="{{ route('post.edit', ['id' => $post->id])}}" class="btn btn-primary mb-2">変更</a> 
-      <a href="{{route('post.show', ['id' => $post->id])}}" class="btn btn-secondary mb-2">詳細</a>
-    <!-- デリート機能 -->
-      <hr>
-      <a href="{{ route('post.delete', ['id' => $post->id]) }}" class="btn btn-danger">
-      <i class="fa fa-btn fa-trash"></i>削除</a>
+      <a href="{{ route('post.edit', ['id' => $post->id])}}" class="btn btn-primary">編集</a> 
+      <a href="{{route('post.show', ['id' => $post->id])}}" class="btn btn-info">詳細</a>
+      <a href="{{ route('post.delete', ['id' => $post->id]) }}" class="btn btn-outline-secondary mt-2">
+      <i class="fa fa-btn fa-trash"></i> 削除</a>
     </td>
     </tr>
     </tbody>

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StorePostForm;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -30,7 +31,6 @@ class PostController extends Controller
         $posts = Post::orderBy('created_at', 'desc')
         ->with(['user', 'resident'])
         ->simplePaginate(5);
-        
         
         return view('post.index', compact('posts', 'users', 'residents'));
         
