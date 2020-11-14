@@ -108,13 +108,15 @@ class PostController extends Controller
         return redirect('/post');
     }
 
-    public function edit($id)
+    public function edit($id, Request $request, Post $post)
     {
         $units = Unit::all();
         $residents = Resident::all();
 
         $post = Post::with(['resident', 'unit'])->findOrFail($id);
-                
+           
+        $this->authorize('destroy', $post);
+        
         return view('post.edit', compact('post', 'residents', 'units'));
     }
 
