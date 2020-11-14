@@ -27,12 +27,13 @@ class PostController extends Controller
         $users = User::all();
         //selectBoxのための$resident
         $residents = Resident::all();
+        $units = Unit::all();
 
         $posts = Post::orderBy('created_at', 'desc')
-        ->with(['user', 'resident'])
+        ->with(['user', 'resident', 'unit'])
         ->simplePaginate(5);
         
-        return view('post.index', compact('posts', 'users', 'residents'));
+        return view('post.index', compact('posts', 'users', 'residents', 'units'));
         
     }
 
@@ -40,29 +41,47 @@ class PostController extends Controller
     {
         $users = User::all();
         $residents = Resident::all();
+        $units = Unit::all();
 
-        $userId = $request->user_id;
-        $residentId = $request->resident_id;
+        $user_id = $request->user_id;
+        $resident_id = $request->resident_id;
+        $unit_id = $request->unit_id;
 
-        if($userId && !$residentId){
-            $posts = Post::where('user_id', $userId)
+        if ($user_id){
+            $posts = Post::where('user_id', $user_id)
                         ->simplePaginate(5);
         }
         
-
-        if(!$userId && $residentId){
-            $posts = Post::where('resident_id', $residentId)
+        if($resident_id){
+            $posts = Post::where('resident_id', $resident_id)
                         ->simplePaginate(5);
         }
 
-        if($userId && $residentId){
-            $posts = Post::where('user_id', $userId)
-                        ->where('resident_id', $userId)
+        if($user_id && $resident_id){
+            $posts = Post::where('user_id', $user_id)
+                        ->where('resident_id', $resident_id)
                         ->simplePaginate(5);
         }
-        
 
-        return view('post.index', compact('users', 'posts', 'residents'));
+        if($unit_id){
+            $posts = Post::where('unit_id', $unit_id)
+                        ->simplePaginate(5);
+        }
+
+        if($user_id && $resident_id && $unit_id){
+            $posts = Post::where('user_id', $user_id)
+                        ->where('resident_id', $user_id)
+                        ->where('unit_id', $unit_id)
+                        ->simplePaginate(5);
+        }
+
+        if(!$user_id && !$resident_id && !$unit_id){
+            return redirect()->back();
+        }
+
+
+        return view('post.index', compact('users', 'posts', 'residents','units'));
+    
     }
 
     public function show($id)
