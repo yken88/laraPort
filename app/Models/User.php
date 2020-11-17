@@ -60,7 +60,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];    
 
-    public static function scopeTextarea($query)
+    public static function scopeOption($query)
     {
         return $query->select('id','name')->get();
     }

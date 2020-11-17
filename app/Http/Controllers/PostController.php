@@ -2,17 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Post;
+use App\Http\Requests\StorePostForm;
 use App\Models\Check;
-use App\Models\User;
+use App\Models\Post;
 use App\Models\Resident;
 use App\Models\Unit;
-use Illuminate\Support\Facades\DB;
+use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\StorePostForm;
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -23,18 +21,17 @@ class PostController extends Controller
 
     public function index()
     {
-        //selectBoxのための$users
-        $users = User::textarea();
-        //selectBoxのための$resident
-        $residents = Resident::textarea();
-        $units = Unit::textarea();
+        // selectbox のoption
+        $users = User::option();
+        $residents = Resident::option();
+        $units = Unit::option();
 
         $posts = Post::orderBy('created_at', 'desc')
-        ->with(['user', 'resident', 'unit'])
-        ->simplePaginate(5);
-        
+            ->with(['user', 'resident', 'unit'])
+            ->simplePaginate(5);
+
         return view('post.index', compact('posts', 'users', 'residents', 'units'));
-        
+
     }
 
     public function search(Request $request)
@@ -47,41 +44,40 @@ class PostController extends Controller
         $resident_id = $request->resident_id;
         $unit_id = $request->unit_id;
 
-        if ($user_id){
+        if ($user_id) {
             $posts = Post::where('user_id', $user_id)
-                        ->simplePaginate(5);
+                ->simplePaginate(5);
         }
-        
-        if($resident_id){
+
+        if ($resident_id) {
             $posts = Post::where('resident_id', $resident_id)
-                        ->simplePaginate(5);
+                ->simplePaginate(5);
         }
 
-        if($user_id && $resident_id){
+        if ($user_id && $resident_id) {
             $posts = Post::where('user_id', $user_id)
-                        ->where('resident_id', $resident_id)
-                        ->simplePaginate(5);
+                ->where('resident_id', $resident_id)
+                ->simplePaginate(5);
         }
 
-        if($unit_id){
+        if ($unit_id) {
             $posts = Post::where('unit_id', $unit_id)
-                        ->simplePaginate(5);
+                ->simplePaginate(5);
         }
 
-        if($user_id && $resident_id && $unit_id){
+        if ($user_id && $resident_id && $unit_id) {
             $posts = Post::where('user_id', $user_id)
-                        ->where('resident_id', $user_id)
-                        ->where('unit_id', $unit_id)
-                        ->simplePaginate(5);
+                ->where('resident_id', $user_id)
+                ->where('unit_id', $unit_id)
+                ->simplePaginate(5);
         }
 
-        if(!$user_id && !$resident_id && !$unit_id){
+        if (!$user_id && !$resident_id && !$unit_id) {
             return redirect()->back();
         }
 
+        return view('post.index', compact('users', 'posts', 'residents', 'units'));
 
-        return view('post.index', compact('users', 'posts', 'residents','units'));
-    
     }
 
     public function show($id)
@@ -89,25 +85,25 @@ class PostController extends Controller
         $post = Post::find($id);
 
         $user_id = Auth::id();
-        
+
         $checkedMembers = Check::orderBy('created_at', 'desc')
-                        ->where('post_id', $id)
-                        ->with('user')
-                        ->get();
+            ->where('post_id', $id)
+            ->with('user')
+            ->get();
 
         $checked = DB::table('checks')
-                    ->where('user_id', $user_id)
-                    ->where('post_id', $id)
-                    ->exists();
+            ->where('user_id', $user_id)
+            ->where('post_id', $id)
+            ->exists();
 
         return view('post.show', compact('post', 'checkedMembers', 'checked'));
-        
+
     }
 
     public function create()
     {
         $residents = Resident::all();
-    
+
         $user = Auth::user();
 
         return view('post.create', compact('user', 'residents'));
@@ -133,9 +129,9 @@ class PostController extends Controller
         $residents = Resident::all();
 
         $post = Post::with(['resident', 'unit'])->findOrFail($id);
-           
+
         $this->authorize('destroy', $post);
-        
+
         return view('post.edit', compact('post', 'residents', 'units'));
     }
 
@@ -153,13 +149,13 @@ class PostController extends Controller
         return redirect('/post');
     }
 
-     public function delete($id, Request $request, Post $post)
-    {   
+    public function delete($id, Request $request, Post $post)
+    {
 
         $delete_post = Post::with('user')->find($id);
 
         $this->authorize('destroy', $delete_post);
-        return view('post.delete', compact('delete_post'));     
+        return view('post.delete', compact('delete_post'));
     }
 
     public function destroy(Request $request, Post $post)
