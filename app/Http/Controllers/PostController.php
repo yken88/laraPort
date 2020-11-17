@@ -24,10 +24,10 @@ class PostController extends Controller
     public function index()
     {
         //selectBoxのための$users
-        $users = User::all();
+        $users = User::textarea();
         //selectBoxのための$resident
-        $residents = Resident::all();
-        $units = Unit::all();
+        $residents = Resident::textarea();
+        $units = Unit::textarea();
 
         $posts = Post::orderBy('created_at', 'desc')
         ->with(['user', 'resident', 'unit'])

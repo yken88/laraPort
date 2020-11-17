@@ -37,7 +37,6 @@ class Post extends Model
     {
     return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('Y-m-d');
     }
-    
 }   
 
     

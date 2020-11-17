@@ -59,4 +59,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];    
+
+    public static function scopeTextarea($query)
+    {
+        return $query->select('id','name')->get();
+    }
 }
