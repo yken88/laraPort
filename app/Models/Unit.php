@@ -23,4 +23,8 @@ class Unit extends Model
         return $this->hasMany(Post::class);
     }
 
+    public static function scopeTextarea($query)
+    {
+        return $query->select('id','unit_name','floor')->get();
+    }
 }
