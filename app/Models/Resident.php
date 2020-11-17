@@ -18,7 +18,7 @@ class Resident extends Model
         return $this->hasOne(Adl::class);
     }
 
-    public static function scopeTextarea($query)
+    public static function scopeOption($query)
     {
         return $query->select('id','resident_name')->get();
     }
