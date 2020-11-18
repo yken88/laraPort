@@ -54,18 +54,11 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::find($id);
-
         $user_id = Auth::id();
 
-        $checkedMembers = Check::orderBy('created_at', 'desc')
-            ->where('post_id', $id)
-            ->with('user')
-            ->get();
+        $checkedMembers = Check::member($id);
 
-        $checked = DB::table('checks')
-            ->where('user_id', $user_id)
-            ->where('post_id', $id)
-            ->exists();
+        $checked = Check::checked($id, $user_id);
 
         return view('post.show', compact('post', 'checkedMembers', 'checked'));
 
