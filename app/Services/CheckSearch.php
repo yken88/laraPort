@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Models\Post;
 use App\Http\Requests\StorePostForm;
-use App\Models\User;
 use Illuminate\Http\Request;
 
 class CheckSearch {
@@ -43,10 +42,11 @@ class CheckSearch {
                 ->simplePaginate(5);
         }
 
-        if (!$user_id && !$resident_id && !$unit_id) {
-            return redirect()->back();
+        if (!$user_id && !$resident_id && !$unit_id){
+            $posts = null;
         }
 
         return $posts;
+
     }
 }

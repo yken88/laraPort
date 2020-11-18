@@ -11,6 +11,11 @@
   <p class="text-info">⬇️こちらのから、投稿者・入居者・ユニットを選択して申し送りを絞り込めます。<br>
     複数選択、単一選択、どちらでも検索可能です。
   </p>
+  @if(session('flash_message'))
+    <p class="text-danger">
+      ＊{{ session('flash_message')}}
+    </p>
+  @endif
 </div>
 <table class="table table-info">
   <thead>

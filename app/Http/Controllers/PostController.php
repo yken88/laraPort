@@ -43,6 +43,10 @@ class PostController extends Controller
 
         $posts = CheckSearch::checkData($request);
 
+        if(empty($posts)){
+            return redirect()->back()->with('flash_message', '最低でも、一つは選択してください。');
+        }
+
         return view('post.index', compact('users', 'residents', 'units', 'posts'));
 
     }
