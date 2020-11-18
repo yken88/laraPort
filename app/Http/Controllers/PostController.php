@@ -22,7 +22,7 @@ class PostController extends Controller
 
     public function index()
     {
-        // selectbox のoption
+        // selectbox のoption, 各名前とidのみ取り出すため、ModelのローカルスコープscopeOption()を適用。
         $users = User::option();
         $residents = Resident::option();
         $units = Unit::option();
@@ -37,9 +37,9 @@ class PostController extends Controller
 
     public function search(Request $request)
     {
-        $users = User::all();
-        $residents = Resident::all();
-        $units = Unit::all();
+        $users = User::option();
+        $residents = Resident::option();
+        $units = Unit::option();
 
         $posts = CheckSearch::checkData($request);
 
@@ -69,7 +69,7 @@ class PostController extends Controller
 
     public function create()
     {
-        $residents = Resident::all();
+        $residents = Resident::option();
 
         $user = Auth::user();
 
@@ -92,8 +92,8 @@ class PostController extends Controller
 
     public function edit($id, Request $request, Post $post)
     {
-        $units = Unit::all();
-        $residents = Resident::all();
+        $units = Unit::option();
+        $residents = Resident::option();
 
         $post = Post::with(['resident', 'unit'])->findOrFail($id);
 
