@@ -4,19 +4,27 @@
 
 @section('content')
 
-<table class="table">
-  <thead class="thead-dark">
+<div class="text-right">
+  <a href="{{ route('post.create') }}" class="btn btn-outline-info mb-3">新規作成</a>
+</div>
+<div class="text-center">
+  <p class="text-info">⬇️こちらのから、投稿者・入居者・ユニットを選択して申し送りを絞り込めます。<br>
+    複数選択、単一選択、どちらでも検索可能です。
+  </p>
+</div>
+<table class="table table-info">
+  <thead>
     <tr>
-      <th scope="col">#</th>
+      <th scope="col"></th>
       <th scope="col">投稿者</th>
       <th scope="col">入居者</th>
       <th scope="col">ユニット</th>
-      <th scope="col">検索</th>
+      <th scope="col"></th>
     </tr>
   </thead>
   <tbody>
     <tr>
-        <th scope="row">検索</th>
+        <th scope="row"></th>
         <form action="{{ route('post.search') }}" method="get">
         <td>
           <select name="user_id" class="form-control">
@@ -43,14 +51,11 @@
         </td>
         <td>
           <div class="text-right">
-            <input type="submit" class="btn btn-outline-secondary mb-3" value="絞り込む">
+            <input type="submit" class="btn btn-light" value="絞り込む">
           </div>
         </td>
     </tr>
     </form>
-    </div>
-    <div class="text-right">
-      <a href="{{ route('post.create') }}" class="btn btn-outline-info mb-3">新規作成</a>
     </div>
 <div>
     <table class="table table-bordered">
@@ -76,7 +81,7 @@
           <td>{{ $post->created_at }}</td>
           <td>
             <a href="{{ route('post.edit', ['id' => $post->id])}}" class="btn btn-primary">編集</a>
-            <a href="{{route('post.show', ['id' => $post->id])}}" class="btn btn-info">詳細</a>
+            <a href="{{ route('post.show', ['id' => $post->id])}}" class="btn btn-info">詳細</a>
             <a href="{{ route('post.delete', ['id' => $post->id]) }}" class="btn btn-outline-secondary">
               <i class="fa fa-btn fa-trash"></i> 削除</a>
           </td>
