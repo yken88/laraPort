@@ -70,10 +70,11 @@ class PostController extends Controller
     public function create()
     {
         $residents = Resident::option();
+        $units = Unit::option();
 
         $user = Auth::user();
 
-        return view('post.create', compact('user', 'residents'));
+        return view('post.create', compact('residents', 'units', 'user'));
     }
 
     public function store(StorePostForm $request)
@@ -84,7 +85,7 @@ class PostController extends Controller
         $post->content = $request->content;
         $post->user_id = Auth::id();
         $post->resident_id = $request->resident_id;
-        $post->unit_id = 1;
+        $post->unit_id = $request->unit_id;
         $post->save();
 
         return redirect('/post');

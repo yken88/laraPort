@@ -25,6 +25,12 @@
       <option value="{{ $resident->id }}">{{ $resident->resident_name}}様</option>
     @endforeach
     </select>
+    <label for="unit_id">ユニット</label>
+    <select name="unit_id" class="form-control col-md-4">
+    @foreach($units as $unit)
+      <option value="{{ $unit->id }}">{{ $unit->floor }}階{{ $unit->unit_name}}</option>
+    @endforeach
+    </select>
   </div>
   <div class="form-group">
     <label for="title">タイトル</label>
