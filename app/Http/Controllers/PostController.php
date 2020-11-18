@@ -11,6 +11,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Services\CheckSearch;
 
 class PostController extends Controller
 {
@@ -40,43 +41,9 @@ class PostController extends Controller
         $residents = Resident::all();
         $units = Unit::all();
 
-        $user_id = $request->user_id;
-        $resident_id = $request->resident_id;
-        $unit_id = $request->unit_id;
+        $posts = CheckSearch::checkData($request);
 
-        if ($user_id) {
-            $posts = Post::where('user_id', $user_id)
-                ->simplePaginate(5);
-        }
-
-        if ($resident_id) {
-            $posts = Post::where('resident_id', $resident_id)
-                ->simplePaginate(5);
-        }
-
-        if ($user_id && $resident_id) {
-            $posts = Post::where('user_id', $user_id)
-                ->where('resident_id', $resident_id)
-                ->simplePaginate(5);
-        }
-
-        if ($unit_id) {
-            $posts = Post::where('unit_id', $unit_id)
-                ->simplePaginate(5);
-        }
-
-        if ($user_id && $resident_id && $unit_id) {
-            $posts = Post::where('user_id', $user_id)
-                ->where('resident_id', $user_id)
-                ->where('unit_id', $unit_id)
-                ->simplePaginate(5);
-        }
-
-        if (!$user_id && !$resident_id && !$unit_id) {
-            return redirect()->back();
-        }
-
-        return view('post.index', compact('users', 'posts', 'residents', 'units'));
+        return view('post.index', compact('users', 'residents', 'units', 'posts'));
 
     }
 
