@@ -45,8 +45,9 @@ class UserController extends Controller
 
     public function edit($id)
     {
+        $units = Unit::option();
         $user = User::find($id);
-        return view('admin.user.edit', compact('user'));
+        return view('admin.user.edit', compact('user', 'units'));
     }
 
     public function update(Request $request)
@@ -55,10 +56,10 @@ class UserController extends Controller
 
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->password = $request->password;
-        $user->save();
+        $user->password;
+        $user->update();
 
-        return redirect()->back();
+        return redirect('admin/user');
     }
 
     public function delete($id)
