@@ -21,8 +21,14 @@ class PostPolicy
         //
     }
 
-    public function destroy(User $user, Post $post)
+    public function postControl(User $user, Post $post)
     {
         return $user->id === $post->user_id;
+    }
+
+
+    public function userControl(Admin $admin, Auth $user)
+    {
+        return $user = $admin;
     }
 }
