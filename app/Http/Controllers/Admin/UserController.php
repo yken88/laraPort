@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Admin;
+use App\Models\Unit;
 
 
 class UserController extends Controller
@@ -13,10 +14,13 @@ class UserController extends Controller
     {
         $this->middleware('admin');
     }
+    
     //ユーザ一覧
     public function index()
     {
-        $users = User::orderBy('id', 'asc')->simplePaginate(5);
+        $users = User::orderBy('id', 'asc')
+                    ->with('unit')        
+                    ->simplePaginate(5);
         return view('admin.user.index', compact('users'));
     }
 
