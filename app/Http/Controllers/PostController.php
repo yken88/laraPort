@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Services\CheckSearch;
+use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
 {
@@ -31,6 +32,7 @@ class PostController extends Controller
             ->with(['user', 'resident', 'unit'])
             ->simplePaginate(5);
 
+        //dd($posts);
         return view('post.index', compact('posts', 'users', 'residents', 'units'));
 
     }
@@ -90,14 +92,17 @@ class PostController extends Controller
 
     public function edit($id, Request $request, Post $post)
     {
+        
         $units = Unit::option();
         $residents = Resident::option();
-
+        
         $post = Post::with(['resident', 'unit'])->findOrFail($id);
 
-        $this->authorize('destroy', $post);
-
-        return view('post.edit', compact('post', 'residents', 'units'));
+        if(Gate::allows('postControl', $post)){
+            return view('post.edit', compact('post', 'residents', 'units'));
+        }else {
+            return redirect()->back()->with('message', '自分が投稿した申し送りのみ、編集できます。');
+        }
     }
 
     public function update($id, Request $request)
@@ -119,14 +124,15 @@ class PostController extends Controller
 
         $delete_post = Post::with('user')->find($id);
 
-        $this->authorize('destroy', $delete_post);
-        return view('post.delete', compact('delete_post'));
+        if(Gate::allows('postControl', $post)){
+            return view('post.delete', compact('delete_post'));
+        }else {
+            return redirect()->back()->with('delete','自分が投稿した申し送りのみ、削除できます。');
+        }
     }
 
     public function destroy(Request $request, Post $post)
     {
-        $this->authorize('destroy', $post);
-
         $post->delete();
 
         return redirect('/post');

@@ -26,5 +26,7 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
+
+        Gate::define('post.postControl', 'App\Policies\PostPolicy@postControl');
     }
 }
