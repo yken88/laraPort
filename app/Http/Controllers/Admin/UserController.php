@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Admin;
+use App\Models\Unit;
 
 
 class UserController extends Controller
@@ -13,16 +14,20 @@ class UserController extends Controller
     {
         $this->middleware('admin');
     }
+    
     //ユーザ一覧
     public function index()
     {
-        $users = User::orderBy('id', 'asc')->simplePaginate(5);
+        $users = User::orderBy('id', 'asc')
+                    ->with('unit')        
+                    ->simplePaginate(5);
         return view('admin.user.index', compact('users'));
     }
 
     public function create()
     {
-        return view('admin.user.create');
+        $units = Unit::option();
+        return view('admin.user.create', compact('units'));
     }
 
     public function store(Request $request)
@@ -32,6 +37,7 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = $request->password;
+        $user->unit_id = $request->unit_id;
         $user->save();
 
         return redirect()->back();
@@ -39,8 +45,9 @@ class UserController extends Controller
 
     public function edit($id)
     {
+        $units = Unit::option();
         $user = User::find($id);
-        return view('admin.user.edit', compact('user'));
+        return view('admin.user.edit', compact('user', 'units'));
     }
 
     public function update(Request $request)
@@ -49,10 +56,10 @@ class UserController extends Controller
 
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->password = $request->password;
-        $user->save();
+        $user->password;
+        $user->update();
 
-        return redirect()->back();
+        return redirect('admin/user');
     }
 
     public function delete($id)

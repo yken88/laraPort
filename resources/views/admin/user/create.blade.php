@@ -1,26 +1,87 @@
 @extends('layouts.master')
 @section('title', '新規登録')
-@section('overview', 'ようこそ、新しいユーザー情報を入力してください')
+@section('overview', '管理者が新しいユーザを登録する用のページ。何らかの事情で、アプリが使えない人のため。')
 @section('content')
-<form action="{{ route('user.store') }}" method="post">
-@csrf
-<div class="form-group">
-    <label for="name">お名前</label>
-    <input type="text" name="name" class="form-control" placeholder="お名前">
+<div class="container">
+  <div class="row justify-content-center">
+      <div class="col-md-8">
+          <div class="card">
+              <div class="card-header">{{ __('Register') }}</div>
 
+              <div class="card-body">
+                  <form method="POST" action="{{ route('register') }}">
+                      @csrf
+
+                      <div class="form-group row">
+                          <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+
+                          <div class="col-md-6">
+                              <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+
+                              @error('name')
+                                  <span class="invalid-feedback" role="alert">
+                                      <strong>{{ $message }}</strong>
+                                  </span>
+                              @enderror
+                          </div>
+                      </div>
+
+                      <div class="form-group row">
+                          <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+
+                          <div class="col-md-6">
+                              <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+
+                              @error('email')
+                                  <span class="invalid-feedback" role="alert">
+                                      <strong>{{ $message }}</strong>
+                                  </span>
+                              @enderror
+                          </div>
+                      </div>
+
+                      <div class="form-group row">
+                          <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+
+                          <div class="col-md-6">
+                              <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+
+                              @error('password')
+                                  <span class="invalid-feedback" role="alert">
+                                      <strong>{{ $message }}</strong>
+                                  </span>
+                              @enderror
+                          </div>
+                      </div>
+
+                      <div class="form-group row">
+                          <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+
+                          <div class="col-md-6">
+                              <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                          </div>
+                      </div>
+
+                      <div class="form-group row">
+                          <label for="unit_id" class="col-md-4 col-form-label text-md-right">ユニット</label>
+                          <select name="unit_id">
+                            @foreach( $units as $unit )
+                              <option value="{{ $unit->id}}">{{ $unit->floor }}階{{ $unit->unit_name }}</option>
+                            @endforeach
+                          </select>
+                      </div>
+
+                      <div class="form-group row mb-0">
+                          <div class="col-md-6 offset-md-4">
+                              <button type="submit" class="btn btn-primary">
+                                  {{ __('Register') }}
+                              </button>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+          </div>
+      </div>
   </div>
-  <div class="form-group">
-    <label for="exampleInputEmail1">メールアドレス</label>
-    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="メールアドレス">
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">パスワード</label>
-    <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="パスワード">
-  </div>
-  <!-- <div class="form-group">
-    <label for="exampleInputPassword1">パスワード(確認)</label>
-    <input type="password" name="password2" class="form-control" id="exampleInputPassword1" placeholder="パスワード（確認）">
-  </div> -->
-  <button type="submit" class="btn btn-primary">登録する</button>
-</form>
+</div>
 @endsection
