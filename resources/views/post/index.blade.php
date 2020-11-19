@@ -12,9 +12,9 @@
     複数選択、単一選択、どちらでも検索可能です。
   </p>
   @if(session('flash_message'))
-    <p class="text-danger">
-      ＊{{ session('flash_message')}}
-    </p>
+  <p class="text-danger">
+    ＊{{ session('flash_message')}}
+  </p>
   @endif
 </div>
 <table class="table table-info">
@@ -29,8 +29,8 @@
   </thead>
   <tbody>
     <tr>
-        <th scope="row"></th>
-        <form action="{{ route('post.search') }}" method="get">
+      <th scope="row"></th>
+      <form action="{{ route('post.search') }}" method="get">
         <td>
           <select name="user_id" class="form-control">
             <option></option>
@@ -62,41 +62,50 @@
     </tr>
     </form>
     </div>
-<div>
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th scope="col" style="width:10%;">投稿者</th>
-          <th scope="col" style="width:10%;">ユニット</th>
-          <th scope="col" style="width:10%;">入居者</th>
-          <th scope="col" style="width:10%;">タイトル</th>
-          <th scope="col" style="width:20%;">内容</th>
-          <th scope="col" style="width:12%;">日付</th>
-          <th scope="col" style="width:20%;">ボタン</th>
-        </tr>
-      </thead>
-      @foreach($posts as $post)
-      <tbody>
-        <tr>
-          <td>{{ $post->user->name }}</td>
-          <td>{{ $post->unit->unit_name }}</td>
-          <td>{{ $post->resident->resident_name }}</td>
-          <td>{{ $post->title }}</td>
-          <td>{{ \Illuminate\Support\Str::limit($post->content, 70, $end='...') }}</td>
-          <td>{{ $post->created_at }}</td>
-          <td>
-            <a href="{{ route('post.edit', ['id' => $post->id])}}" class="btn btn-primary">編集</a>
-            <a href="{{ route('post.show', ['id' => $post->id])}}" class="btn btn-info">詳細</a>
-            <a href="{{ route('post.delete', ['id' => $post->id]) }}" class="btn btn-outline-secondary">
-              <i class="fa fa-btn fa-trash"></i> 削除</a>
-          </td>
-        </tr>
-      </tbody>
-      @endforeach
-    </table>
-    {{ $posts->appends(request()->input())->links() }}
+    <div>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col" style="width:10%;">投稿者</th>
+            <th scope="col" style="width:10%;">ユニット</th>
+            <th scope="col" style="width:10%;">入居者</th>
+            <th scope="col" style="width:10%;">タイトル</th>
+            <th scope="col" style="width:20%;">内容</th>
+            <th scope="col" style="width:12%;">日付</th>
+            <th scope="col" style="width:20%;">ボタン</th>
+          </tr>
+        </thead>
+        @if(session('message'))
+          <p class="text-danger text-right">
+            ＊{{ session('message')}}
+          </p>
+        @elseif(session('delete'))
+        <p class="text-danger text-right">
+          ＊{{ session('delete')}}
+        </p>
+        @endif
+        @foreach($posts as $post)
+        <tbody>
+          <tr>
+            <td>{{ $post->user->name }}</td>
+            <td>{{ $post->unit->unit_name }}</td>
+            <td>{{ $post->resident->resident_name }}</td>
+            <td>{{ $post->title }}</td>
+            <td>{{ \Illuminate\Support\Str::limit($post->content, 70, $end='...') }}</td>
+            <td>{{ $post->created_at }}</td>
+            <td>
+              <a href="{{ route('post.edit', ['id' => $post->id])}}" class="btn btn-primary">編集</a>
+              <a href="{{ route('post.show', ['id' => $post->id])}}" class="btn btn-info">詳細</a>
+              <a href="{{ route('post.delete', ['id' => $post->id]) }}" class="btn btn-outline-secondary">
+                <i class="fa fa-btn fa-trash"></i> 削除</a>
+            </td>
+          </tr>
+        </tbody>
+        @endforeach
+      </table>
+      {{ $posts->appends(request()->input())->links() }}
     </div>
-  </div>
+    </div>
     @if (session('flash_message'))
     <div class="text-danger">
       {{ session('flash_message') }}
