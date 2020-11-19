@@ -11,21 +11,23 @@ class ResidentsController extends Controller
 {
     public function index()
     {
-        $residents = Resident::all();
+        $residents = Resident::orderBy('created_at', 'desc')
+                    ->simplePaginate(8);
 
-        return view('admin.residents.index')->with('residents', $residents);
+        return view('admin.residents.index', compact('residents'));
     }
 
     public function create()
     {
-        return view('admin.residents.create');
+        $units = Unit::option();
+        return view('admin.residents.create', compact('units'));
     }
 
     public function store(Request $request)
     {   
         $resident = new Resident;
 
-        $resident->resident_name = $request->input('resedent_name');
+        $resident->resident_name = $request->input('resident_name');
         $resident->age = $request->age;
         $resident->gender = $request->gender;
         $resident->assistance = $request->assistance;
@@ -34,7 +36,7 @@ class ResidentsController extends Controller
 
         $resident->save();
 
-        return redirect()->back();
+        return redirect('admin/residents');
     }
     public function show($id)
     {
