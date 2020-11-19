@@ -3,7 +3,7 @@
 @section('overview', 'ユーザーの一覧です。管理者しか見れない画面にする予定。てか検索機能も付けたいね。')
 @section('content')
 <div class="text-right">
-  <a href="{{ route('admin.user.index') }}" class="btn btn-outline-dark">ユーザ新規登録</a>
+  <a href="{{ route('admin.user.create') }}" class="btn btn-outline-dark">ユーザ新規登録</a>
 </div>
 <table class="table">
   <thead>

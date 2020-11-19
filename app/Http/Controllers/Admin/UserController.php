@@ -26,7 +26,8 @@ class UserController extends Controller
 
     public function create()
     {
-        return view('admin.user.create');
+        $units = Unit::option();
+        return view('admin.user.create', compact('units'));
     }
 
     public function store(Request $request)
@@ -36,6 +37,7 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = $request->password;
+        $user->unit_id = $request->unit_id;
         $user->save();
 
         return redirect()->back();
