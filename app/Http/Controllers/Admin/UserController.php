@@ -65,9 +65,15 @@ class UserController extends Controller
     public function delete($id)
     {
         $user = User::find($id);
+        
+        return view('admin.user.delete', compact('user'));
+    }
+    public function destroy($id)
+    {
+        $user = User::findOrfail($id);   
         $user->delete();
 
-        return redirect()->back();
+        return redirect('admin/user')->with('message','ユーザを削除しました。');
     }
 }
 

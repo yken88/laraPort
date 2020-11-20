@@ -2,6 +2,12 @@
 @section('title', 'ユーザ一覧')
 @section('overview', 'ユーザーの一覧です。管理者しか見れない画面にする予定。てか検索機能も付けたいね。')
 @section('content')
+@if(session('message'))
+  <div class="text-right text-danger">
+  {{ session('message') }}
+  </div>
+@endif
+<br>
 <div class="text-right">
   <a href="{{ route('admin.user.create') }}" class="btn btn-outline-dark">ユーザ新規登録</a>
 </div>
@@ -22,9 +28,9 @@
       <td>{{ $user->email }}</td>
       <td>{{ $user->unit->floor }}階{{ $user->unit->unit_name }}</td>
       <td><a href="user/{{ $user->id }}/edit" class="btn btn-primary">編集</a></td>
-      <td><a href="user/{{ $user->id }}/delete" class="btn btn-danger">削除</a></td>
+    <td><a href="{{ route('admin.user.delete', ['id' => $user->id]) }}" class="btn btn-danger">削除</a></td>
     </tr>
-　</tbody>
+  </tbody>
     @endforeach
 </table>
 

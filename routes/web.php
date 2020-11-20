@@ -43,8 +43,8 @@ Route::prefix('admin')->namespace('Admin')->as('admin.')->group(function(){
         Route::post('/create', 'UserController@store')->name('user.store');
         Route::get('/{id}/edit', 'UserController@edit')->name('user.edit');
         Route::post('/{id}/edit', 'UserController@update')->name('user.update');
-        //一度確認画面を開いた方がいいかもしれない。とりあえず作ってみるって感じで、少しずつ変えていく。
         Route::get('/{id}/delete', 'UserController@delete')->name('user.delete');
+        Route::delete('/{id}/destroy', 'UserController@destroy')->name('user.destroy');
     });
     
     // 入居者管理
