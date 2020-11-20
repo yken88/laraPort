@@ -7,10 +7,34 @@
   {{ session('message') }}
   </div>
 @endif
-<br>
 <div class="text-right">
   <a href="{{ route('admin.user.create') }}" class="btn btn-outline-dark">ユーザ新規登録</a>
 </div>
+<div class="text-center">
+  <p class="text-info">⬇️こちらのからユーザーの検索が出来ます。
+  </p>
+</div>
+<table class="table table-info">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row"></th>
+      <form action="" method="get">
+        <td>
+          <input type="text" name="name" class="form-control" placeholder="ユーザの名前を入力してください。">
+          <td>
+            <div class="text-right">
+              <input type="submit" class="btn btn-light" value="検索">
+            </div>
+          </td>
+    </form>
+  </div>
+<br>
+
 <table class="table">
   <thead>
     <tr>
@@ -33,6 +57,5 @@
   </tbody>
     @endforeach
 </table>
-
-{{ $users->links() }}
+{{ $users->appends(Request::only('name'))->links()}}
 @endsection
