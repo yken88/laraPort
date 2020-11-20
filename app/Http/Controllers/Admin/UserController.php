@@ -16,12 +16,22 @@ class UserController extends Controller
     }
     
     //ユーザ一覧
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::orderBy('id', 'asc')
+        $selectOptions = User::option();
+
+        $string = $request->name;
+
+        if($string != ''){
+            $users = User::where('name', 'like','%'.$string.'%')
+                            ->simplePaginate(5);
+        }else{
+            $users = User::orderBy('id', 'asc')
                     ->with('unit')        
                     ->simplePaginate(5);
-        return view('admin.user.index', compact('users'));
+        }
+
+        return view('admin.user.index', compact('users', 'selectOptions'));
     }
 
     public function create()
