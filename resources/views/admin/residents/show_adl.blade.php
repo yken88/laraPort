@@ -61,11 +61,12 @@
 </div>
 @endforeach
 <br>
-<div class="container">
+<div class="container"
   <div class="text-right">
     <a href="{{ route('admin.residents.edit', ['id' => $item->id ]) }}" class="btn btn-outline-primary mr-2">編集</a>
     <a href="{{ route('admin.residents.index')}}" class="btn btn-outline-secondary">戻る</a>
   </div>
+
 </div>
 
 
