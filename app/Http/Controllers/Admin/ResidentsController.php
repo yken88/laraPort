@@ -9,12 +9,22 @@ use App\Models\Adl;
 
 class ResidentsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $residents = Resident::orderBy('created_at', 'desc')
-                    ->simplePaginate(8);
+        $selectOptions = Resident::option();
 
-        return view('admin.residents.index', compact('residents'));
+        $string = $request->resident_name;
+        
+        if($string != ''){
+            $residents = Resident::where('resident_name', 'like','%'.$string.'%')
+                                    ->simplePaginate(5);
+        }else{
+            $residents = Resident::orderBy('created_at', 'desc')
+                        ->simplePaginate(5);
+        }
+
+        return view('admin.residents.index', compact('selectOptions', 'residents'));
+        
     }
 
     public function create()
@@ -38,13 +48,15 @@ class ResidentsController extends Controller
 
         return redirect('admin/residents');
     }
+
     public function show($id)
     {
+        $resident = Resident::findOrFail($id);
         $adl = Adl::where('resident_id', $id)
                 ->with('resident')
                 ->get();
         //dd($adl);
-        return view('admin.residents.show_adl', compact('adl'));
+        return view('admin.residents.show_adl', compact('adl', 'resident'));
     }
 
     public function edit($id)
