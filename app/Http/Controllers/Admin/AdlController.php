@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Models\Adl;
+use App\Http\Requests\StoreAdlForm;
 
 class AdlController extends Controller
 {
@@ -18,7 +19,7 @@ class AdlController extends Controller
         return view('admin.residents.edit_adl', compact('adls'));
     }
 
-    public function updateAdl(Request $request)
+    public function updateAdl(StoreAdlForm $request)
     {
         $adl = new Adl;
 
