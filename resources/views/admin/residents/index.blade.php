@@ -4,6 +4,12 @@
 @section('overview', '入居者一覧です。編集は詳細画面から出来ます。')
 
 @section('content')
+@if(session('update'))
+<div class="text-center">
+  <p class="text-danger">{{ session('update') }}</p>
+</div>
+  
+@endif
 <table class="table table-info">
   <thead class="text-center">
     <tr>
