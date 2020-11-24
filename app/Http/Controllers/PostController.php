@@ -87,10 +87,10 @@ class PostController extends Controller
         $post->unit_id = $request->unit_id;
         $post->save();
 
-        return redirect('/post');
+        return redirect('/post')->with('store', '新しく申し送りを投稿しました。');
     }
 
-    public function edit($id, Request $request, Post $post)
+    public function edit($id, Post $post)
     {
         
         $units = Unit::option();
