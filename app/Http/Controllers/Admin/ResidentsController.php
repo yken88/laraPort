@@ -52,35 +52,25 @@ class ResidentsController extends Controller
     public function show($id)
     {
         $resident = Resident::findOrFail($id);
+
         $adl = Adl::where('resident_id', $id)
                 ->with('resident')
                 ->get();
-        //dd($adl);
+        
         return view('admin.residents.show_adl', compact('adl', 'resident'));
     }
 
     public function edit($id)
     {
-        $adls = Adl::where('resident_id', $id)
-                ->with('resident')
-                ->get();
-        return view('admin.residents.edit', compact('adls'));
+       $resident = Resident::findOrFail($id);
+
+       $unitSelectOptions = Unit::option();
+
+       return view('admin.residents.edit', compact('resident','unitSelectOptions'));
     }
 
     public function update(Request $request)
     {
-        $adl = new Adl;
-
-        $adl->移乗 = $request->移乗;
-        $adl->トイレ動作 = $request->トイレ動作;
-        $adl->平地歩行 = $request->平地歩行;
-        $adl->食事 = $request->食事;
-        $adl->排泄 = $request->排泄;
-        $adl->入浴 = $request->入浴;
-        $adl->更衣 = $request->更衣;
-        $adl->備考 = $request->備考;
-        $adl->save();
-
-        return redirect()->back();
+        
     }
 }

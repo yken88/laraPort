@@ -26,7 +26,7 @@ class CreateAdlsTable extends Migration
             $table->text('discription')->name('備考');
             $table->timestamps();
 
-            $table->foreign('resident_id')->references('id')->on('residents');    
+            $table->foreign('resident_id')->references('id')->on('residents')->onDelete('cascade');    
         });
     }
 

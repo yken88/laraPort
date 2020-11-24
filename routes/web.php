@@ -9,7 +9,7 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 Route::get('/', function () {
     return view('welcome');
 });
@@ -18,26 +18,25 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('logout','Auth\LoginController@logout')->name('logout');
+Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
 //管理者
-Route::prefix('admin')->namespace('Admin')->as('admin.')->group(function(){
-    Route::middleware('guest:admin')->group(function(){
+Route::prefix('admin')->namespace('Admin')->as('admin.')->group(function () {
+    Route::middleware('guest:admin')->group(function () {
         // adminログイン（get post)
         Route::get('login', 'LoginController@showLoginForm')->name('login');
         Route::post('login', 'LoginController@login');
     });
-    
-        //ログアウト(get)
-    Route::middleware('auth:admin')->group(function(){
+
+    //ログアウト(get)
+    Route::middleware('auth:admin')->group(function () {
         Route::get('logout', 'LoginController@logout')->name('logout');
         //管理者top(get)
         Route::get('', 'IndexController@index')->name('top');
     });
 
-
     // ユーザ管理
-    Route::prefix('user')->group(function(){
+    Route::prefix('user')->group(function () {
         Route::get('/', 'UserController@index')->name('user.index');
         Route::get('/create', 'UserController@create')->name('user.create');
         Route::post('/create', 'UserController@store')->name('user.store');
@@ -46,27 +45,27 @@ Route::prefix('admin')->namespace('Admin')->as('admin.')->group(function(){
         Route::get('/{id}/delete', 'UserController@delete')->name('user.delete');
         Route::delete('/{id}/destroy', 'UserController@destroy')->name('user.destroy');
     });
-    
+
     // 入居者管理
-     Route::prefix('residents')->group(function(){
+    Route::prefix('residents')->group(function () {
         Route::get('/', 'ResidentsController@index')->name('residents.index');
-        //Route::post('/', 'ResidentsController@search')->name('residents.search');
         Route::get('/create', 'ResidentsController@create')->name('residents.create');
         Route::post('/create', 'ResidentsController@store')->name('residents.store');
         Route::get('/{id}/show', 'ResidentsController@show')->name('residents.show');
         Route::get('/{id}/edit', 'ResidentsController@edit')->name('residents.edit');
+        //Route::get('/{id}/edit_adl', 'ResidentsController@editAdl')->name('residents.editAdl');
         Route::get('/{id}/update', 'ResidentsController@update')->name('residents.update');
-     });
+    });
+
+    //ADL管理
+    Route::prefix('adl')->group(function () {
+        Route::get('/{id}/edit', 'AdlController@editAdl')->name('adl.editAdl');
+        Route::post('/{id}/edit', 'AdlController@updateAdl')->name('adl.update');
+    });
 });
 
-        
-
-
-
-
-
 // 投稿管理
-Route::prefix('post')->group(function(){
+Route::prefix('post')->group(function () {
     Route::get('/', 'PostController@index')->name('post.index');
     Route::get('/search', 'PostController@search')->name('post.search');
     Route::get('/{id}/show', 'PostController@show')->name('post.show');
@@ -80,7 +79,6 @@ Route::prefix('post')->group(function(){
     Route::get('/{id}/check', 'PostController@check')->name('post.check');
     Route::post('/{id}/check', 'PostController@uncheck')->name('post.uncheck');
 
- });
+});
 
 // 検索
- 
