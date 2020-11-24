@@ -4,8 +4,8 @@
       <p class="lead text-muted">@yield('overview')</p>
     </div>
   </section>
-
-  <div class="album py-5 bg-light">
+  <div class="bg-light">
     <div class="container">
       @yield('content')
+    </div>
   </div>
