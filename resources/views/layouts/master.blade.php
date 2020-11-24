@@ -12,7 +12,7 @@
 
 <header>@include('layouts.header')</header>
 
-<main role="main">@include('layouts.main')</main>
+<main>@include('layouts.main')</main>
 
 <footer class="bg-dark">@include('layouts.footer')</footer>
 
