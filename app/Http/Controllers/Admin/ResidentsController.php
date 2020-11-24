@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Resident;
 use App\Models\Unit;
 use App\Models\Adl;
+use App\Http\Requests\StoreResidentForm;
 
 class ResidentsController extends Controller
 {
@@ -33,7 +34,7 @@ class ResidentsController extends Controller
         return view('admin.residents.create', compact('units'));
     }
 
-    public function store(Request $request)
+    public function store(StoreResidentForm $request)
     {   
         $resident = new Resident;
 
