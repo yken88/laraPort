@@ -59,3 +59,12 @@ index.blade.php
             </select>
 
                 $usersに格納して、indexに渡す。このときはpostのリレーションではなく、usersテーブルから持ってきた方がいい。
+
+ADLを分ける
+
+residentcontroller　editを入居者のみに
+
+adlcontroller residentcontrollerの処理を写す。
+
+adlは入居者詳細画面から、編集画面飛べるようにする。
+userがどのadlを現在編集しているか分かりやすくするため。

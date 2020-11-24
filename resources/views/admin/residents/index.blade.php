@@ -3,6 +3,12 @@
 @section('title', '入居者')
 
 @section('content')
+@if(session('update'))
+<div class="text-center">
+  <p class="text-danger">{{ session('update') }}</p>
+</div>
+  
+@endif
 <table class="table table-info">
   <thead class="text-center">
     <tr>
