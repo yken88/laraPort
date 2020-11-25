@@ -12,30 +12,19 @@ use Illuminate\Support\Facades\DB;
 
 class CheckController extends Controller
 {
-    public function show($id)
-    {   
-        $user_id = Auth::id();
-
-        $checkedMember = Check::where('user_id', $user_id)->where('post_id', $id)->get();
-
-        return view('post.show', compact('checkedMember'));
-        
-
-    }
-
-    public function store($id)
+    // 確認管理
+    public function check($id)
     {
         $check = new Check;
-        $user_id = Auth::id();
 
-        $check->user_id = $user_id;
+        $check->user_id = Auth::id();
         $check->post_id = $id;
         $check->save();
 
-        return redirect()->back();
+        return redirect(route('post.index'))->with('checked', 'あなたは申し送りを確認しました。');
     }
 
-    public function destroy($id)
+    public function unCheck($id)
     {
         $check = Check::where('post_id', $id)->where('user_id', Auth::id());
         $check->delete();

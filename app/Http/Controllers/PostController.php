@@ -59,7 +59,6 @@ class PostController extends Controller
         $user_id = Auth::id();
 
         $checkedMembers = Check::member($id);
-
         $checked = Check::checked($id, $user_id);
 
         return view('post.show', compact('post', 'checkedMembers', 'checked'));
@@ -136,18 +135,6 @@ class PostController extends Controller
         $post->delete();
 
         return redirect('/post');
-    }
-
-    // 確認管理
-    public function check($id)
-    {
-        $check = new Check;
-
-        $check->user_id = Auth::id();
-        $check->post_id = $id;
-        $check->save();
-
-        return redirect()->back();
     }
 
 }
