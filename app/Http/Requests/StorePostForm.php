@@ -25,6 +25,7 @@ class StorePostForm extends FormRequest
     {
         return [
             //
+            'user_id' => 'required',
             'resident_id'=> 'required',
             'unit_id'=> 'required',
             'title' => 'required|string|max:20',
