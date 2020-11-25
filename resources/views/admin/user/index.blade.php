@@ -1,17 +1,23 @@
 @extends('layouts.master')
 @section('title', 'ユーザ一覧')
-@section('overview', 'ユーザーの一覧です。管理者しか見れない画面にする予定。てか検索機能も付けたいね。')
+@section('overview', 'ユーザーの一覧です。')
 @section('content')
+<p class="text-center text-danger">
 @if(session('message'))
-  <div class="text-right text-danger">
   {{ session('message') }}
-  </div>
 @endif
+@if(session('create_a_user'))
+  {{ session('create_a_user') }}
+@endif
+@if(session('delete_a_user'))
+  {{ session('delete_a_user') }}
+@endif
+</p>
 <div class="text-right">
   <a href="{{ route('admin.user.create') }}" class="btn btn-outline-dark">ユーザ新規登録</a>
 </div>
 <div class="text-center">
-  <p class="text-info">⬇️こちらのからユーザーの検索が出来ます。
+  <p class="text-info">⬇️こちらからユーザーの検索が出来ます。
   </p>
 </div>
 <table class="table table-info">
