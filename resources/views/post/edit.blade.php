@@ -5,6 +5,11 @@
 <form action="" method="post">
 @csrf
 <div class="form-group">
+     <label for="resident">投稿者 :</label>
+        <select name="user_id" class="form-control col-md-6">
+            <option value="{{ $post->user->id }}">{{ $post->user->name }} </option>
+        </select>
+      <br> 
      <label for="resident">入居者 :</label>
         <select name="resident_id" class="form-control col-md-6">
             <option value="{{ $post->resident->id }}">{{ $post->resident->resident_name }} 様</option>
@@ -15,7 +20,7 @@
       <br> 
       <label for="unit">ユニット :</label>
           <select name="unit_id" class="form-control col-md-6">
-                <option value="{{ $post->unit->id }}">{{ $post->unit->unit_name }}</option>
+                <option value="{{ $post->unit->id }}">{{ $post->unit->floor}}階{{ $post->unit->unit_name }}</option>
                 @foreach($units as $unit )
                 <option value="{{ $unit->id }}">{{ $unit->unit_name }}</option>
                 @endforeach

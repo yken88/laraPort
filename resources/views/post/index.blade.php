@@ -23,6 +23,10 @@
   @if(session('checked'))
    {{ session('checked') }}
   @endif
+
+  @if(session('update'))
+  {{ session('update')}}
+  @endif
   </p>
 </div>
 <table class="table table-info">
@@ -38,7 +42,8 @@
   <tbody>
     <tr>
       <th scope="row"></th>
-      <form action="{{ route('post.search') }}" method="get">
+      <form action="" method="post">
+        @csrf
         <td>
           <select name="user_id" class="form-control">
             <option></option>
@@ -95,7 +100,7 @@
         @foreach($posts as $post)
         <tbody>
           <tr>
-            <td>{{ $post->user->name }}</td>
+            <td>{{ $post->user->name}}</td>
             <td>{{ $post->unit->unit_name }}</td>
             <td>{{ $post->resident->resident_name }}</td>
             <td>{{ $post->title }}</td>
@@ -117,6 +122,5 @@
     @if (session('flash_message'))
     <div class="text-danger">
       {{ session('flash_message') }}
-
-      @endif
-      @endsection
+    @endif
+  @endsection
