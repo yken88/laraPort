@@ -4,7 +4,7 @@
       <p class="lead text-muted">@yield('overview')</p>
     </div>
   </section>
-  <div class="bg-light">
+  <div class="bg-light p-5">
     <div class="container">
       @yield('content')
     </div>

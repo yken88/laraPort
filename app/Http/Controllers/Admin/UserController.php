@@ -6,18 +6,13 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Admin;
 use App\Models\Unit;
-
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    public function construct()
-    {
-        $this->middleware('admin');
-    }
-    
     //ユーザ一覧
     public function index(Request $request)
-    {
+    { 
         $selectOptions = User::option();
 
         $string = $request->name;
@@ -30,7 +25,7 @@ class UserController extends Controller
                     ->with('unit')        
                     ->simplePaginate(5);
         }
-
+        
         return view('admin.user.index', compact('users', 'selectOptions'));
     }
 
@@ -85,5 +80,6 @@ class UserController extends Controller
 
         return redirect('admin/user')->with('message','ユーザを削除しました。');
     }
+
 }
 

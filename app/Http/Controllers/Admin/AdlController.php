@@ -9,7 +9,6 @@ use App\Http\Requests\StoreAdlForm;
 class AdlController extends Controller
 {
     //adlの編集を担う
-
     public function editAdl($id)
     {
         $adls = Adl::where('resident_id', $id)
