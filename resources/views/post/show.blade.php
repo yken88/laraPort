@@ -4,30 +4,35 @@
 @section('overview', 'しっかりと確認し、完了したら確認ボタンを押してください。')
 
 @section('content')
-        投稿者: {{ $post->user->name }}
+  <div class="text-center">
+        <h2>投稿者 : {{ $post->user->name }}</h2>
         <hr>
-        タイトル: {{ $post->title }}
+        <p>タイトル : {{ $post->title }}</p>
         <hr>
-        内容： {{ $post->content }}
+        <p>内容 : {{ $post->content }}</p>
         <hr>
-        作成日: {{ $post->created_at }}
+        <p>作成日 : {{ $post->created_at }}</p>
        <hr>
-      
-      <!-- 編集と確認ボタン (ここはajaxでした方がいいかも。-->
+  </div>
+  <div class="text-right">
       @if(!$checked)
-      <form action="/post/{{ $post->id }}/check" method="get">
+      <p class="text-info">確認して一覧に戻る⬇️</p>
+      <form action="{{ route('post.check', ['id' => $post->id ]) }}" method="get">
         @csrf
        <button type="sumbit" class="btn btn-primary">確認</button>
       </form>
       @else
+      <form action="{{ route('post.uncheck', ['id' => $post->id ])}}" method="post">
+        @csrf
         <button type="sumbit" class="btn btn-secondary">確認済</button>
+      </form>
       @endif
-      <br>
-      
-      <h3>確認済ユーザ</h3>
+
+      <div class="mt-3">
+      <p>確認済ユーザ</p>
         @foreach( $checkedMembers as $member)
         {{ $member->user->name }}
         @endforeach
-
-      
+      </div>
+  </div>
 @endsection

@@ -76,8 +76,8 @@ Route::prefix('post')->group(function () {
     Route::get('/{id}/delete', 'PostController@delete')->name('post.delete');
     Route::delete('/{post}', 'PostController@destroy');
 // 確認管理
-    Route::get('/{id}/check', 'PostController@check')->name('post.check');
-    Route::post('/{id}/check', 'PostController@uncheck')->name('post.uncheck');
+    Route::get('/{id}/check', 'CheckController@check')->name('post.check');
+    Route::post('/{id}/check', 'CheckController@unCheck')->name('post.uncheck');
 
 });
 
