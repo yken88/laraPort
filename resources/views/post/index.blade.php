@@ -15,8 +15,13 @@
   @if(session('flash_message'))
     ＊{{ session('flash_message')}}
   @endif
+
   @if(session('store'))
     {{ session('store') }}
+  @endif
+
+  @if(session('checked'))
+   {{ session('checked') }}
   @endif
   </p>
 </div>
