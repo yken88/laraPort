@@ -13,23 +13,25 @@
 </div>
 @endif
 <form action="{{ route('post.store') }}" method="post">
-@csrf
-<div class="form-group">
+  @csrf
+  <div class="form-group">
     <label for="exampleInputEmail1">投稿者</label>
-        {{ $user->name }}
+    <select name="user_id" class="form-control col-md-4">
+      <option value="{{ $user->id }}">{{ $user->name }}</option>
+    </select>
   </div>
   <div class="form-group">
     <label for="resident_id">入居者</label>
     <select name="resident_id" class="form-control col-md-4">
-    @foreach($residents as $resident)
-      <option value="{{ $resident->id }}">{{ $resident->resident_name}}様</option>
-    @endforeach
+      @foreach($residents as $resident)
+      <option value="{{ $resident->id }}">{{ $resident->resident_name }}様</option>
+      @endforeach
     </select>
     <label for="unit_id">ユニット</label>
     <select name="unit_id" class="form-control col-md-4">
-    @foreach($units as $unit)
+      @foreach($units as $unit)
       <option value="{{ $unit->id }}">{{ $unit->floor }}階{{ $unit->unit_name}}</option>
-    @endforeach
+      @endforeach
     </select>
   </div>
   <div class="form-group">
@@ -41,8 +43,9 @@
     <textarea name="content" class="form-control" placeholder="内容"></textarea>
   </div>
   <div class="text-right">
-  <a href="{{ route('post.index') }}" class="btn btn-outline-primary"><i class="fa fa-arrow-left" aria-hidden="true"></i>一覧に戻る</a>
-  <button type="submit" class="btn btn-primary ">登録する</button>
+    <a href="{{ route('post.index') }}" class="btn btn-outline-primary"><i class="fa fa-arrow-left"
+        aria-hidden="true"></i>一覧に戻る</a>
+    <button type="submit" class="btn btn-primary ">登録する</button>
   </div>
 </form>
 @endsection

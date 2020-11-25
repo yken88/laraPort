@@ -53,7 +53,6 @@ Route::prefix('admin')->namespace('Admin')->as('admin.')->group(function () {
         Route::post('/create', 'ResidentsController@store')->name('residents.store');
         Route::get('/{id}/show', 'ResidentsController@show')->name('residents.show');
         Route::get('/{id}/edit', 'ResidentsController@edit')->name('residents.edit');
-        //Route::get('/{id}/edit_adl', 'ResidentsController@editAdl')->name('residents.editAdl');
         Route::get('/{id}/update', 'ResidentsController@update')->name('residents.update');
     });
 
@@ -67,7 +66,7 @@ Route::prefix('admin')->namespace('Admin')->as('admin.')->group(function () {
 // 投稿管理
 Route::prefix('post')->group(function () {
     Route::get('/', 'PostController@index')->name('post.index');
-    Route::get('/search', 'PostController@search')->name('post.search');
+    Route::post('/', 'PostController@search')->name('post.search');
     Route::get('/{id}/show', 'PostController@show')->name('post.show');
     Route::get('/create', 'PostController@create')->name('post.create');
     Route::post('/create', 'PostController@store')->name('post.store');
