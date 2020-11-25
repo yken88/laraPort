@@ -10,9 +10,9 @@
   </head>
   <body >
 
-<header>@include('layouts.header')</header>
+<header>@include('layouts.admin_header')</header>
 
-<div class="main bg-dark">@include('layouts.admin_main')</div>
+<div class="main bg-secondary">@include('layouts.admin_main')</div>
 
 <footer class="bg-dark">@include('layouts.footer')</footer>
 

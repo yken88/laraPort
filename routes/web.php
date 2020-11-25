@@ -33,10 +33,10 @@ Route::prefix('admin')->namespace('Admin')->as('admin.')->group(function () {
         Route::get('logout', 'LoginController@logout')->name('logout');
         //管理者top(get)
         Route::get('', 'IndexController@index')->name('top');
-    });
+    });    
 
-    // ユーザ管理
-    Route::prefix('user')->group(function () {
+    // ユーザ管理は管理者(admin)のみ実行できる。
+    Route::middleware('auth:admin')->prefix('user')->group(function () {
         Route::get('/', 'UserController@index')->name('user.index');
         Route::get('/create', 'UserController@create')->name('user.create');
         Route::post('/create', 'UserController@store')->name('user.store');
@@ -46,8 +46,8 @@ Route::prefix('admin')->namespace('Admin')->as('admin.')->group(function () {
         Route::delete('/{id}/destroy', 'UserController@destroy')->name('user.destroy');
     });
 
-    // 入居者管理
-    Route::prefix('residents')->group(function () {
+    // 入居者管理は管理者(admin)のみ実行できる。
+    Route::middleware('auth:admin')->prefix('residents')->group(function () {
         Route::get('/', 'ResidentsController@index')->name('residents.index');
         Route::get('/create', 'ResidentsController@create')->name('residents.create');
         Route::post('/create', 'ResidentsController@store')->name('residents.store');
