@@ -1,7 +1,8 @@
 @extends('layouts.master')
 
-@section('title', '入居者')
-@section('overview', '入居者の一覧です。')
+
+@section('title', '入居者一覧')
+@section('overview', '入居者一覧です。編集は詳細画面から出来ます。')
 
 @section('content')
 @if(session('adl_update'))
