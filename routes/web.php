@@ -31,7 +31,7 @@ Route::prefix('admin')->namespace('Admin')->as('admin.')->group(function () {
     //ログアウト(get)
     Route::middleware('auth:admin')->group(function () {
         Route::get('logout', 'LoginController@logout')->name('logout');
-        //管理者top(get)
+    //管理者top(get)
         Route::get('', 'IndexController@index')->name('top');
     });    
 
@@ -53,13 +53,13 @@ Route::prefix('admin')->namespace('Admin')->as('admin.')->group(function () {
         Route::post('/create', 'ResidentsController@store');
         Route::get('/{id}/show', 'ResidentsController@show')->name('residents.show');
         Route::get('/{id}/edit', 'ResidentsController@edit')->name('residents.edit');
-        Route::get('/{id}/update', 'ResidentsController@update');
+        Route::post('/{id}/edit', 'ResidentsController@update');
     });
 
     //ADL管理
-    Route::prefix('adl')->group(function () {
-        Route::get('/{id}/edit', 'AdlController@editAdl')->name('adl.editAdl');
-        Route::post('/{id}/edit', 'AdlController@updateAdl')->name('adl.update');
+    Route::middleware('auth:admin')->prefix('adl')->group(function () {
+        Route::get('/{id}/edit', 'AdlController@edit')->name('adl.edit');
+        Route::post('/{id}/edit', 'AdlController@update')->name('adl.update');
     });
 });
 

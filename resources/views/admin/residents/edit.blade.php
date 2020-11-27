@@ -4,7 +4,7 @@
 @section('overview', '変更事項を入力してください。')
 
 @section('content')
-<form action="" method="post">
+<form action="" method="POST">
     @csrf
     <div class="form-group">
         <label for="resident_name">お名前</label>
