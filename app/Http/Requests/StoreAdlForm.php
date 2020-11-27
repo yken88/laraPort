@@ -13,7 +13,7 @@ class StoreAdlForm extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,6 @@ class StoreAdlForm extends FormRequest
     public function rules()
     {
         return [
-            'resident_id' => 'required',
             'transferring' => 'required',
             'toilet_action' => 'required',
             'flatland_walking' => 'required',

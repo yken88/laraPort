@@ -63,6 +63,7 @@ class Handler extends ExceptionHandler
         //     return response()->json(['message' => $exception->getMessage()], 401);
         // }
 
+        // admin/user 振り分け
         $url = route(($guard = $exception->guards()[0]) ? $guard.'.login': 'login');
 
         return redirect($url);

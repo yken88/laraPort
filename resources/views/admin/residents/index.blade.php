@@ -1,13 +1,13 @@
 @extends('layouts.master')
 
 @section('title', '入居者')
+@section('overview', '入居者の一覧です。')
 
 @section('content')
-@if(session('update'))
+@if(session('adl_update'))
 <div class="text-center">
-  <p class="text-danger">{{ session('update') }}</p>
+  <p class="text-danger">*{{ session('adl_update') }}</p>
 </div>
-  
 @endif
 <table class="table table-info">
   <thead class="text-center">
