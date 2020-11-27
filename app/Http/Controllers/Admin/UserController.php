@@ -3,30 +3,24 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Services\SearchUser;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\StoreUserForm;
 use App\Models\User;
 use App\Models\Admin;
 use App\Models\Unit;
-use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
     //ユーザ一覧
     public function index(Request $request)
     { 
-        $selectOptions = User::option();
-
         $string = $request->name;
 
-        if($string != ''){
-            $users = User::where('name', 'like','%'.$string.'%')
-                            ->simplePaginate(5);
-        }else{
-            $users = User::orderBy('id', 'asc')
-                    ->with('unit')        
-                    ->simplePaginate(5);
-        }
+        // Services/SearchUser 呼び出し。
+        $users = SearchUser::CheckString($string);
         
-        return view('admin.user.index', compact('users', 'selectOptions'));
+        return view('admin.user.index', compact('users'));
     }
 
     public function create()
@@ -35,17 +29,12 @@ class UserController extends Controller
         return view('admin.user.create', compact('units'));
     }
 
-    public function store(Request $request)
+    public function store(User $user, StoreUserForm $request)
     {
-        $user = new User;
+        // 登録機能を簡潔に。
+        $user->create($request->validated());
 
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = $request->password;
-        $user->unit_id = $request->unit_id;
-        $user->save();
-
-        return redirect()->back();
+        return redirect(route('admin.user.index'))->with('create_a_user', 'ユーザを登録しました。');
     }
 
     public function edit($id)
@@ -55,30 +44,28 @@ class UserController extends Controller
         return view('admin.user.edit', compact('user', 'units'));
     }
 
-    public function update(Request $request)
+    public function update($id, StoreUserForm $request)
     {
-        $user = new User;
+        $user = User::find($id);
 
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password;
-        $user->update();
 
-        return redirect('admin/user');
+        $user->update($request->validated());
+
     }
 
     public function delete($id)
     {
         $user = User::find($id);
         
+        // 削除確認画面へ
         return view('admin.user.delete', compact('user'));
     }
-    public function destroy($id)
+
+    public function destroy(User $user)
     {
-        $user = User::findOrfail($id);   
         $user->delete();
 
-        return redirect('admin/user')->with('message','ユーザを削除しました。');
+        return redirect(route('admin.user.index'))->with('delete_a_user','ユーザを削除しました。');
     }
 
 }

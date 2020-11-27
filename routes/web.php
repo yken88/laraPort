@@ -39,21 +39,21 @@ Route::prefix('admin')->namespace('Admin')->as('admin.')->group(function () {
     Route::middleware('auth:admin')->prefix('user')->group(function () {
         Route::get('/', 'UserController@index')->name('user.index');
         Route::get('/create', 'UserController@create')->name('user.create');
-        Route::post('/create', 'UserController@store')->name('user.store');
+        Route::post('/create', 'UserController@store');
         Route::get('/{id}/edit', 'UserController@edit')->name('user.edit');
-        Route::post('/{id}/edit', 'UserController@update')->name('user.update');
+        Route::post('/{id}/edit', 'UserController@update');
         Route::get('/{id}/delete', 'UserController@delete')->name('user.delete');
-        Route::delete('/{id}/destroy', 'UserController@destroy')->name('user.destroy');
+        Route::post('/{id}/delete', 'UserController@destroy');
     });
 
     // 入居者管理は管理者(admin)のみ実行できる。
     Route::middleware('auth:admin')->prefix('residents')->group(function () {
         Route::get('/', 'ResidentsController@index')->name('residents.index');
         Route::get('/create', 'ResidentsController@create')->name('residents.create');
-        Route::post('/create', 'ResidentsController@store')->name('residents.store');
+        Route::post('/create', 'ResidentsController@store');
         Route::get('/{id}/show', 'ResidentsController@show')->name('residents.show');
         Route::get('/{id}/edit', 'ResidentsController@edit')->name('residents.edit');
-        Route::get('/{id}/update', 'ResidentsController@update')->name('residents.update');
+        Route::get('/{id}/update', 'ResidentsController@update');
     });
 
     //ADL管理
