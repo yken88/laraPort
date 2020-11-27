@@ -115,13 +115,13 @@ class PostController extends Controller
         return redirect(route('post.index'))->with('update', '申し送りを変更しました。');
     }
 
-    public function delete($id, Request $request, Post $post)
+    public function delete($id, Request $request)
     {
 
         $delete_post = Post::with('user')->find($id);
 
         // 申し送りを削除する認可をcheck
-        if(Gate::allows('postControl', $post)){
+        if(Gate::allows('postControl', $delete_post)){
             return view('post.delete', compact('delete_post'));
         }else {
             return redirect()->back()->with('delete','自分が投稿した申し送りのみ、削除できます。');
