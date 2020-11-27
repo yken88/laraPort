@@ -8,31 +8,21 @@ use App\Http\Requests\StoreAdlForm;
 
 class AdlController extends Controller
 {
-    //adlの編集を担う
-    public function editAdl($id)
+    //adlの編集
+    public function edit($id)
     {
-        $adls = Adl::where('resident_id', $id)
-            ->with('resident')
-            ->get();
+        $adl = Adl::find($id);
 
-        return view('admin.residents.edit_adl', compact('adls'));
+        return view('admin.residents.edit_adl', compact('adl'));
     }
 
-    public function updateAdl(StoreAdlForm $request)
+
+    public function update($id, Request $request)
     {
-        $adl = new Adl;
+        $adl = Adl::find($id);
+        
+        $adl->update($request->all());
 
-        $adl->resident_id = $adl->resident_id;
-        $adl->移乗 = $request->移乗;
-        $adl->トイレ動作 = $request->トイレ動作;
-        $adl->平地歩行 = $request->平地歩行;
-        $adl->食事 = $request->食事;
-        $adl->排泄 = $request->排泄;
-        $adl->入浴 = $request->入浴;
-        $adl->更衣 = $request->更衣;
-        $adl->備考 = $request->備考;
-        $adl->update();
-
-        return redirect('admin/residents')->with('update', '更新しました。');
+        return redirect(route('admin.residents.index'))->with('adl_update', 'adlを更新しました。');
     }
 }
