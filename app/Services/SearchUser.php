@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\User;
+use App\Models\Resident;
 
 class SearchUser {
     public static function CheckString($string)
@@ -18,5 +19,18 @@ class SearchUser {
         }
 
         return $users;
+    }
+
+    public static function CheckResidentString($string)
+    {
+        if($string != ''){
+            $residents = Resident::where('resident_name', 'like','%'.$string.'%')
+                                    ->simplePaginate(5);
+        }else{
+            $residents = Resident::orderBy('created_at', 'desc')
+                        ->simplePaginate(5);
+        }
+
+        return $residents;
     }
 }

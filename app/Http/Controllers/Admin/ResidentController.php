@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreResidentForm;
+use App\Services\SearchUser;
 use App\Models\Resident;
 use App\Models\Unit;
 use App\Models\Adl;
-use App\Http\Requests\StoreResidentForm;
 
-class ResidentsController extends Controller
+class ResidentController extends Controller
 {
     public function index(Request $request)
     {
@@ -16,13 +17,7 @@ class ResidentsController extends Controller
 
         $string = $request->resident_name;
         
-        if($string != ''){
-            $residents = Resident::where('resident_name', 'like','%'.$string.'%')
-                                    ->simplePaginate(5);
-        }else{
-            $residents = Resident::orderBy('created_at', 'desc')
-                        ->simplePaginate(5);
-        }
+        $residents = SearchUser::CheckResidentString($string);
 
         return view('admin.residents.index', compact('selectOptions', 'residents'));
         
@@ -34,20 +29,11 @@ class ResidentsController extends Controller
         return view('admin.residents.create', compact('units'));
     }
 
-    public function store(StoreResidentForm $request)
+    public function store(Resident $resident, StoreResidentForm $request)
     {   
-        $resident = new Resident;
+        $resident->create($request->validated());
 
-        $resident->resident_name = $request->input('resident_name');
-        $resident->age = $request->age;
-        $resident->gender = $request->gender;
-        $resident->assistance = $request->assistance;
-        $resident->info = $request->info;
-        $resident->unit_id = $request->unit_id;
-
-        $resident->save();
-
-        return redirect('admin/residents');
+        return redirect(route('admin.residents.index'));
     }
 
     public function show($id)
@@ -70,8 +56,13 @@ class ResidentsController extends Controller
        return view('admin.residents.edit', compact('resident','unitSelectOptions'));
     }
 
-    public function update(Request $request)
+    public function update($id, Request $request)
     {
-        
+        $resident = Resident::find($id);
+
+        $resident->update($request->all());
+
+        return redirect(route('admin.residents.index'))
+                ->with('update_a_resident', 'ユーザ情報を更新しました。');
     }
 }
