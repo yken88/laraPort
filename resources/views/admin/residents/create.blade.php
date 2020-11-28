@@ -3,7 +3,7 @@
 @section('overview', '入居者の情報を入力してください。')
 
 @section('content')
-<form action="{{ route('admin.residents.store') }}" method="post">
+<form action="" method="post">
   @csrf
   <div class="form-group">
     <label for="resident_name">お名前</label>

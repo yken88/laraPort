@@ -4,11 +4,19 @@
 @section('overview', '入居者の一覧です。')
 
 @section('content')
-@if(session('adl_update'))
+
 <div class="text-center">
-  <p class="text-danger">*{{ session('adl_update') }}</p>
+  <p class="text-danger">
+    @if(session('adl_update'))
+    *{{ session('adl_update') }}
+    @endif
+
+    @if(session('update_a_resident'))
+    *{{ session('update_a_resident') }}
+    @endif
+  </p>
 </div>
-@endif
+
 <table class="table table-info">
   <thead class="text-center">
     <tr>
