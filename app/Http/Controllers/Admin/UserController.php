@@ -37,22 +37,6 @@ class UserController extends Controller
         return redirect(route('admin.user.index'))->with('create_a_user', 'ユーザを登録しました。');
     }
 
-    public function edit($id)
-    {
-        $units = Unit::option();
-        $user = User::find($id);
-        return view('admin.user.edit', compact('user', 'units'));
-    }
-
-    public function update($id, StoreUserForm $request)
-    {
-        $user = User::find($id);
-
-
-        $user->update($request->validated());
-
-    }
-
     public function delete($id)
     {
         $user = User::find($id);

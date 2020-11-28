@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
-@section('title','ユーザ詳細')
+@section('title','ユーザ削除確認画面')
+@section('overview', '削除するユーザを確認してください。')
 
 @section('content')
 
@@ -19,11 +20,12 @@
       <div class="text-right">
         <form method="post">
         @csrf
-        <button type="submit"  class="btn btn-danger">
+        <a href="{{ route('admin.user.index') }}" class="btn btn-outline-info mr-3">
+        ⬅️一覧に戻る</a>
+        <button type="submit"  class="btn btn-outline-secondary">
           <i class="fa fa-btn fa-trash"></i> 削除
         </button>
-        <a href="{{ route('admin.user.index') }}" class="btn btn-outline-primary">
-        <i class="fa fa-arrow-left"></i>一覧に戻る</a>
         </div>
+        </form>
        <hr>
 @endsection
