@@ -1,7 +1,9 @@
 @extends('layouts.master')
 @section('title', 'ユーザ一覧')
-@section('overview', 'ユーザーの一覧です。')
+@section('overview', '新規登録を削除のみ実行できます。')
+
 @section('content')
+
 <p class="text-center text-danger">
 @if(session('message'))
   {{ session('message') }}
@@ -17,7 +19,7 @@
   <a href="{{ route('admin.user.create') }}" class="btn btn-outline-dark">ユーザ新規登録</a>
 </div>
 <div class="text-center">
-  <p class="text-info">⬇️こちらからユーザーの検索が出来ます。
+  <p class="text-info">⬇️こちらからユーザーの検索が出来ます。Ï
   </p>
 </div>
 <table class="table table-info">
@@ -57,11 +59,11 @@
       <td>{{ $user->name }}</td>
       <td>{{ $user->email }}</td>
       <td>{{ $user->unit->floor }}階{{ $user->unit->unit_name }}</td>
-      <td><a href="user/{{ $user->id }}/edit" class="btn btn-primary">編集</a></td>
-    <td><a href="{{ route('admin.user.delete', ['id' => $user->id]) }}" class="btn btn-danger">削除</a></td>
+    <td><a href="{{ route('admin.user.delete', ['id' => $user->id]) }}" class="btn btn-outline-secondary">削除</a></td>
     </tr>
   </tbody>
     @endforeach
 </table>
-{{ $users->appends(Request::only('name'))->links()}}
+
+{{ $users->appends(Request::only('name'))->links() }}</p>
 @endsection
