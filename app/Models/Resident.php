@@ -9,6 +9,10 @@ use App\Models\Adl;
 
 class Resident extends Model
 {
+    protected $guarded = [
+        'resident_name',
+    ];
+
     public function posts()
     {
         return $this->hasMany(Post::class);

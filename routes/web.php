@@ -46,12 +46,12 @@ Route::prefix('admin')->namespace('Admin')->as('admin.')->group(function () {
 
     // 入居者管理は管理者(admin)のみ実行できる。
     Route::middleware('auth:admin')->prefix('residents')->group(function () {
-        Route::get('/', 'ResidentsController@index')->name('residents.index');
-        Route::get('/create', 'ResidentsController@create')->name('residents.create');
-        Route::post('/create', 'ResidentsController@store');
-        Route::get('/{id}/show', 'ResidentsController@show')->name('residents.show');
-        Route::get('/{id}/edit', 'ResidentsController@edit')->name('residents.edit');
-        Route::post('/{id}/edit', 'ResidentsController@update');
+        Route::get('/', 'ResidentController@index')->name('residents.index');
+        Route::get('/create', 'ResidentController@create')->name('residents.create');
+        Route::post('/create', 'ResidentController@store');
+        Route::get('/{id}/show', 'ResidentController@show')->name('residents.show');
+        Route::get('/{id}/edit', 'ResidentController@edit')->name('residents.edit');
+        Route::post('/{id}/edit', 'ResidentController@update');
     });
 
     //ADL管理
@@ -61,7 +61,7 @@ Route::prefix('admin')->namespace('Admin')->as('admin.')->group(function () {
     });
 });
 
-// 投稿管理
+// 申し送り管理
 Route::prefix('post')->group(function () {
     Route::get('/', 'PostController@index')->name('post.index');
     Route::post('/', 'PostController@search')->name('post.search');
