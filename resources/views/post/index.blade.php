@@ -1,6 +1,6 @@
 @extends('layouts.master')
-@section('title', '申し送り一覧')
-@section('overview', '申し送り、しっかり確認しましょう。')
+@section('title', 'SEND')
+@section('overview', '申し送りを管理するサービスです。あなたがいない時に起きたことを確認しましょう。')
 
 @section('content')
 

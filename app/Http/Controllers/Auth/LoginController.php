@@ -42,6 +42,18 @@ class LoginController extends Controller
     public function logout(){
         Auth::logout();
 
-        return view('auth.login');
+        // logout後のredirectを変更
+        return view('welcome');
+    }
+
+    /**
+     * login後のredirect先を指定。
+     */
+    
+    public function redirectPath()
+    {
+        return '/post';
+        //例）return 'costs/index';
     }
 }
+
