@@ -102,7 +102,7 @@
           <tr>
             <td>{{ $post->user->name}}</td>
             <td>{{ $post->unit->unit_name }}</td>
-            <td>{{ $post->resident->resident_name }}</td>
+            <td>{{ optional($post->resident)->resident_name }}</td>
             <td>{{ $post->title }}</td>
             <td>{{ \Illuminate\Support\Str::limit($post->content, 70, $end='...') }}</td>
             <td>{{ $post->created_at }}</td>
