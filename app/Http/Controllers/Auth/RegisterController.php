@@ -71,7 +71,5 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'unit_id' => $data['unit_id'],
         ]);
-
-        return view('post.index');
     }
 }
