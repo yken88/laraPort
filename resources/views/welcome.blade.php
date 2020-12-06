@@ -114,7 +114,7 @@
                         <td>MySQL</td>
                       </tr>
                       <tr>
-                        <td>デプロイ</td>
+                        <td>deploy</td>
                         <td>Heroku</td>
                       </tr>
                       
