@@ -114,8 +114,8 @@
                         <td>MySQL</td>
                       </tr>
                       <tr>
-                        <td>インフラ</td>
-                        <td>AWS</td>
+                        <td>デプロイ</td>
+                        <td>Heroku</td>
                       </tr>
                       
                     </tbody>
