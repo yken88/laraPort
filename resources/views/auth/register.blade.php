@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@extends('title', '新規登録')
+@extends('overview', '新規登録画面、ユニットを忘れずに。')
+
+
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
