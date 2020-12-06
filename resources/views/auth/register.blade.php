@@ -70,10 +70,22 @@
                         </div>
 
                         <div class="form-group row">
+<<<<<<< HEAD
                             <label for="unit_id">ユニット</label>
                             <select name="unit_id">
                                 <option value="{{ $unit->id}}">{{ $unit->floor}}階{{ $unit->unit_name }}</option>
                             </select>
+=======
+                            <label for="unit_id" class="col-md-4 col-form-label text-md-right">ユニット</label>
+
+                            <div class="col-md-6">
+                            <select name="unit_id" class="form-control">
+                             @foreach(App\Models\Unit::option() as $unit )
+                                <option value="{{ $unit->id}}">{{ $unit->floor}}階{{ $unit->unit_name }}</option>
+                            @endforeach
+                            </select>
+                            </div>
+>>>>>>> main
                         </div>
 
                         <div class="form-group row mb-0">
