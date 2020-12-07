@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
-@extends('title', '新規登録')
-@extends('overview', '新規登録画面、ユニットを忘れずに。')
+@section('title', '新規登録')
+@section('overview', '新規登録画面、ユニットを忘れずに。')
 
 
 @section('content')
