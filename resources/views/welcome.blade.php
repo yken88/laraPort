@@ -57,16 +57,28 @@
                 </div>
 
 
-                <div class="form-group row mb-0 text-right">
+                <div class="row mb-0 text-right">
                     <div class="col-md-6 offset-md-4">
                         <button type="submit" class="btn btn-primary">
                             {{ __('Login') }}
                         </button>
                     </div>
                 </div>
-        </div>
+            </div>
         </form>
+
         </div>
+        <div class="text-center oneclick-form">
+            <p class="text-primary">閲覧用の簡単ログイン機能です。</p>
+
+            <form action="{{ route('login')}}" method="POST">
+                @csrf
+            <input type="hidden" name="email" value="example@example.com">
+                <input type="hidden" name="password" value="Password">
+                <button type="submit" class="btn btn-outline-primary">ユーザ簡単ログイン</button>
+            </form>
+        </div>
+
     </main>
 
     <div class="description mt-5">

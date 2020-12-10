@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
         //$this->call(UsersTableSeeder::class);
         //$this->call(PostsTableSeeder::class);
         $this->call(UnitsTableSeeder::class);
-        //$this->call(ResidentsTableSeeder::class);
+        $this->call(ResidentsTableSeeder::class);
         //$this->call(AdlsTableSeeder::class);
 
         factory(App\Models\Admin::class)->create(
