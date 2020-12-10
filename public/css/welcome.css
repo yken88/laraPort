@@ -46,8 +46,12 @@ body {
     left: 30%;
 }
 
-
-
+.main .oneclick-form {
+    width: 100%;
+    position: absolute;
+    top: 65%;
+    left: 5%;    
+}
 .description  h2 {
     border-bottom: solid 3px red;
 }
