@@ -22,8 +22,8 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 Route::prefix('admin')->namespace('Admin')->as('admin.')->group(function () {
     Route::middleware('guest:admin')->group(function () {
         // adminログイン（get post)
-        Route::get('login', 'LoginController@showLoginForm')->name('login');
-        Route::post('login', 'LoginController@login');
+        Route::get('login', 'LoginController@showLoginForm');
+        Route::post('login', 'LoginController@login')->name('login');
     });
 
     //ログアウト(get)
