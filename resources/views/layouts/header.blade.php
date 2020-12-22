@@ -9,7 +9,7 @@
             <div class="top-right links pt-1">
                 @auth
                
-                  <a href="{{ route('logout') }}" class="btn btn-outlinelight d-none d-md-inline-block mr-2">ログアウト</a>
+                  <a href="{{ route('logout') }}" class="btn btn-outline-light d-none d-md-inline-block mr-2">ログアウト</a>
 
                   <a href="{{ route('post.index') }}" class="btn btn-outline-light  d-none d-md-inline-block">申し送り一覧</a>
                 </ul>

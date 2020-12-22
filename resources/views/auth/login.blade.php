@@ -59,15 +59,18 @@
                                     {{ __('Login') }}
                                 </button>
                             </div>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
                         </div>
                     </form>
+                    <div class="text-center oneclick-form">
+                        <p class="text-primary">閲覧用の簡単ログイン機能です。</p>
+            
+                        <form action="{{ route('login')}}" method="POST">
+                            @csrf
+                        <input type="hidden" name="email" value="example@example.com">
+                            <input type="hidden" name="password" value="Password">
+                            <button type="submit" class="btn btn-outline-primary">ユーザ簡単ログイン</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
