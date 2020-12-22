@@ -52,6 +52,16 @@
                             </div>
                         </div>
                     </form>
+                    <div class="text-center oneclick-form">
+                        <p class="text-primary">閲覧用の簡単ログイン機能です。</p>
+            
+                        <form action="{{ route('admin.login')}}" method="POST">
+                            @csrf
+                            <input type="hidden" name="username" value="kentaro">
+                            <input type="hidden" name="password" value="password">
+                            <button type="submit" class="btn btn-outline-primary">ユーザ簡単ログイン</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
