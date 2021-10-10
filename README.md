@@ -1,6 +1,4 @@
-## About Portfolio
-
-
-## Learning Laravel
+## About
+介護施設の連絡のためのサービスです
 
 
